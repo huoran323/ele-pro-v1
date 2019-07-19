@@ -1,5 +1,5 @@
 <template>
-  <div id="userLayout" :class="['user-layout-wrapper', device]">
+  <div id="userLayout">
     <div class="container">
       <div class="top">
         <div class="header">
@@ -11,7 +11,7 @@
         <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
       </div>
 
-      <route-view></route-view>
+      <!-- <route-view></route-view> -->
 
       <div class="footer">
         <div class="links">
@@ -25,22 +25,22 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "UserLayout",
+  mounted() {
+    document.body.classList.add("userLayout");
+  },
+  beforeDestroy() {
+    document.body.classList.remove("userLayout");
+  }
+};
 </script>
 <style lang="less" scoped>
-#userLayout.user-layout-wrapper {
+#userLayout {
   height: 100%;
 
-  &.mobile {
-    .container {
-      .main {
-        max-width: 368px;
-        width: 98%;
-      }
-    }
-  }
-
   .container {
+    box-sizing: border-box;
     width: 100%;
     min-height: 100%;
     background: #f0f2f5 url(~@/assets/background.svg) no-repeat 50%;
@@ -58,16 +58,6 @@ export default {};
       .header {
         height: 44px;
         line-height: 44px;
-
-        .badge {
-          position: absolute;
-          display: inline-block;
-          line-height: 1;
-          vertical-align: middle;
-          margin-left: -12px;
-          margin-top: -10px;
-          opacity: 0.8;
-        }
 
         .logo {
           height: 44px;
