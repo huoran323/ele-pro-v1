@@ -11,7 +11,7 @@
         <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
       </div>
 
-      <!-- <route-view></route-view> -->
+      <router-view></router-view>
 
       <div class="footer">
         <div class="links">
