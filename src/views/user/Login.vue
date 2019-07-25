@@ -59,6 +59,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -72,23 +73,53 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["Login"]),
     handleClick(tab) {
       this.activeName = tab.name;
     },
 
     submitForm(formName) {
-      const { activeName } = this;
+      const { activeName, validateForm, Login } = this;
       const validateFieldsKey =
         activeName === "account"
           ? ["username", "password"]
           : ["phone", "captcha"];
+      const parameter =
+        activeName === "account"
+          ? { username: validateForm.username, password: validateForm.password }
+          : { phone: validateForm.phone, captcha: validateForm.captcha };
       // 对部分表单进行验证
-      this.$refs.validateForm.validateField(validateFieldsKey, error => {
-        if (error) {
-          console.log("error submit!!");
-        } else {
-          console.log("submit!!");
-        }
+      validateFieldsKey.map(item => {
+        this.$refs["validateForm"].validateField(item);
+      });
+      // this.$refs["validateForm"].validateField("username");
+      // this.$refs.validateForm.validateField(validateFieldsKey, error => {
+      //   if (!error) {
+      //     Login(parameter)
+      //       .then(res => this.loginSuccess(res))
+      //       .catch(err => this.requestFailed(err));
+      //   } else {
+      //     console.log("error submit!!");
+      //   }
+      // });
+    },
+    loginSuccess(res) {
+      this.$router.push({ name: "dashboard" });
+      // 延迟一秒显示欢迎信息
+      setTimeout(() => {
+        this.$notify({
+          title: "欢迎",
+          message: "欢迎回来",
+          type: "success"
+        });
+      }, 1000);
+    },
+    requestFailed(err) {
+      this.$notify.error({
+        title: "错误",
+        message:
+          ((err.response || {}).data || {}).message ||
+          "请求出现错误，请稍后再试"
       });
     }
   }
