@@ -89,19 +89,34 @@ export default {
           ? { username: validateForm.username, password: validateForm.password }
           : { phone: validateForm.phone, captcha: validateForm.captcha };
       // 对部分表单进行验证
-      validateFieldsKey.map(item => {
-        this.$refs["validateForm"].validateField(item);
+      let _self = this;
+      Promise.all(
+        validateFieldsKey.map(item => {
+          let p = new Promise(function(resolve, reject) {
+            _self.$refs.validateForm.validateField(item, error => {
+              resolve(error);
+            });
+          });
+          return p;
+        })
+      ).then(data => {
+        console.info(data);
+        // data 里是各个字段的验证错误信息, 如果为空串则认为验证通过, 如果数组里全为空串则所有验证通过
+        // 判断data 里是否全是空串
+        let empty = false;
+        data.map(item => {
+          if (item) {
+            empty = true;
+          } else {
+            empty = false;
+          }
+        });
+        if (!empty) {
+          Login(parameter)
+            .then(res => this.loginSuccess(res))
+            .catch(err => this.requestFailed(err));
+        }
       });
-      // this.$refs["validateForm"].validateField("username");
-      // this.$refs.validateForm.validateField(validateFieldsKey, error => {
-      //   if (!error) {
-      //     Login(parameter)
-      //       .then(res => this.loginSuccess(res))
-      //       .catch(err => this.requestFailed(err));
-      //   } else {
-      //     console.log("error submit!!");
-      //   }
-      // });
     },
     loginSuccess(res) {
       this.$router.push({ name: "dashboard" });
