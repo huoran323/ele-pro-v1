@@ -44,12 +44,12 @@
       </el-tabs>
 
       <el-form-item>
-        <el-checkbox v-model="rememberMe">自动登录</el-checkbox>
-        <router-link
+        <el-checkbox>自动登录</el-checkbox>
+        <!-- <router-link
           :to="{ name: 'recover', params: { user: 'aaa'} }"
           class="forge-password"
           style="float: right;"
-        >忘记密码</router-link>
+        >忘记密码</router-link>-->
       </el-form-item>
 
       <el-form-item>
@@ -100,7 +100,6 @@ export default {
           return p;
         })
       ).then(data => {
-        console.info(data);
         // data 里是各个字段的验证错误信息, 如果为空串则认为验证通过, 如果数组里全为空串则所有验证通过
         // 判断data 里是否全是空串
         let empty = false;
@@ -112,13 +111,13 @@ export default {
           }
         });
         if (!empty) {
-          Login(parameter)
-            .then(res => this.loginSuccess(res))
-            .catch(err => this.requestFailed(err));
+          Login(parameter).then(res => this.loginSuccess(res));
+          // .catch(err => this.requestFailed(err));
         }
       });
     },
     loginSuccess(res) {
+      console.log(res);
       this.$router.push({ name: "dashboard" });
       // 延迟一秒显示欢迎信息
       setTimeout(() => {
@@ -130,6 +129,7 @@ export default {
       }, 1000);
     },
     requestFailed(err) {
+      console.log(err);
       this.$notify.error({
         title: "错误",
         message:

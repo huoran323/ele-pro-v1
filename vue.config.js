@@ -13,14 +13,14 @@ module.exports = {
       .loader("url-loader")
       .tap(options => Object.assign(options, { limit: 2048 }));
     config.resolve.alias.set("@", resolve("src"));
-  },
-  configureWebpack: {
-    externals: {
-      vue: "Vue",
-      vuex: "Vuex",
-      "vue-router": "VueRouter",
-      "element-ui": "ELEMENT"
-    },
-    plugins: []
   }
+  // configureWebpack: {
+  //   externals: {
+  //     vue: "Vue",
+  //     vuex: "Vuex",
+  //     "vue-router": "VueRouter",
+  //     "element-ui": "ELEMENT"
+  //   },
+  //   plugins: []
+  // }
 };
