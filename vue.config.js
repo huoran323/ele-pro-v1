@@ -13,7 +13,7 @@ module.exports = {
       .loader("url-loader")
       .tap(options => Object.assign(options, { limit: 2048 }));
     config.resolve.alias.set("@", resolve("src"));
-  }
+  },
   // configureWebpack: {
   //   externals: {
   //     vue: "Vue",
@@ -23,4 +23,18 @@ module.exports = {
   //   },
   //   plugins: []
   // }
+  devServer: {
+    port: 8080
+    // proxy: {
+    //   "/api": {
+    //     // target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro',
+    //     target: "http://192.168.1.108:8080/",
+    //     ws: false,
+    //     changeOrigin: true, //是否跨域
+    //     pathRewrite: {
+    //       "/api": "/"
+    //     }
+    //   }
+    // }
+  }
 };

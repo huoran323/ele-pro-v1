@@ -1,11 +1,10 @@
-import Mock from "mockjs";
+import Mock from "mockjs2";
 import { builder, getBody } from "../util";
 
 const username = ["admin", "user", "super"];
 const password = ["admin", "ant.design"]; // admin, ant.design
 
 const login = options => {
-  debugger;
   const body = getBody(options);
   //   console.log("mock: body", body);
   if (!username.includes(body.username) || !password.includes(body.password)) {
@@ -37,4 +36,4 @@ const login = options => {
   );
 };
 
-Mock.mock(/api\/auth\/login/, "post", login);
+Mock.mock(/\/auth\/login/, "post", login);
