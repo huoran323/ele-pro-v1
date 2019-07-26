@@ -21,7 +21,8 @@ export const asyncRouterMap = [
             component: () => import("@/views/dashboard/Workplace"),
             meta: {
               title: "工作台",
-              keepAlive: true
+              keepAlive: true,
+              roles: ["admin", "editor"]
             }
           }
         ]

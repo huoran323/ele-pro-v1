@@ -119,7 +119,7 @@ export default {
     },
     loginSuccess(res) {
       console.log(res);
-      this.$router.push({ path: "/dashboard/workplace" });
+      this.$router.push({ name: "dashboard" });
       // 延迟一秒显示欢迎信息
       setTimeout(() => {
         this.$notify({

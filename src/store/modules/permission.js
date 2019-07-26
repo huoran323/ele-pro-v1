@@ -22,18 +22,18 @@ const hasPermission = (permission, route) => {
 };
 
 // 筛选符合权限的路由
-// const filterAsyncRouter = (routerMap, roles) => {
-//   const accessedRouters = routerMap.filter(route => {
-//     if (hasPermission(roles.permissionList, route)) {
-//       if (route.children && route.children.length) {
-//         route.children = filterAsyncRouter(route.children, roles);
-//       }
-//       return true;
-//     }
-//     return false;
-//   });
-//   return accessedRouters;
-// };
+const filterAsyncRouter = (routerMap, roles) => {
+  const accessedRouters = routerMap.filter(route => {
+    if (hasPermission(roles.permissionList, route)) {
+      if (route.children && route.children.length) {
+        route.children = filterAsyncRouter(route.children, roles);
+      }
+      return true;
+    }
+    return false;
+  });
+  return accessedRouters;
+};
 
 const permission = {
   state: {
@@ -50,7 +50,9 @@ const permission = {
     GenerateRoutes({ commit }) {
       return new Promise(resolve => {
         // const { roles } = data; //从permission.js中分发过来的角色参数
-        // const accessedRouters = filterAsyncRouter(asyncRouterMap, roles);
+        // const accessedRouters = filterAsyncRouter(asyncRouterMap);
+        // console.log("accessedRouters ---", asyncRouterMap);
+
         commit("SET_ROUTERS", asyncRouterMap);
         resolve();
       });

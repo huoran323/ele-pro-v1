@@ -14,21 +14,44 @@ const whiteList = ["login"]; // no redirect whitelist
 // next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
 router.beforeEach((to, from, next) => {
   //NProgress.start(); //进度条开始
+
   //判断token
   if (Vue.ls.get(ACCESS_TOKEN)) {
     // 即将要进入的路由
+    console.log("to --> ", to);
+
     if (to.path === "/user/login") {
       // 下一个要进入的路由
+
       next({ path: "/dashboard/workplace" });
       // NProgress.done();
     } else {
+      store.dispatch("GenerateRoutes").then(() => {
+        // 根据roles权限生成可访问的路由表
+        // 动态添加可访问路由表
+
+        router.addRoutes(store.getters.addRouters);
+        // console.log("store.getters.addRouters --- ", store.getters.addRouters);
+        const redirect = decodeURIComponent(from.query.redirect || to.path);
+
+        console.log("redirect --- ", redirect);
+        if (to.path === redirect) {
+          // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
+          // next({ ...to, replace: true });
+          // next({ path: redirect });
+          console.log("to.path ---", to);
+        } else {
+          // 跳转到目的路由
+          next({ path: redirect });
+        }
+      });
     }
   } else {
     if (whiteList.includes(to.name)) {
       // 在免登录白名单，直接进入
       next();
     } else {
-      next({ path: "/user/login", query: { redirect: to.fullPath } });
+      next({ path: "/user/login" });
       // NProgress.done(); // if current page is login will not trigger afterEach hook, so manually handle it
     }
   }
