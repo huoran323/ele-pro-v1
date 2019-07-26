@@ -111,8 +111,9 @@ export default {
           }
         });
         if (!empty) {
-          Login(parameter).then(res => this.loginSuccess(res));
-          // .catch(err => this.requestFailed(err));
+          Login(parameter)
+            .then(res => this.loginSuccess(res))
+            .catch(err => this.requestFailed(err));
         }
       });
     },
