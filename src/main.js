@@ -13,6 +13,7 @@ import { VueAxios } from "./utils/request";
 import "./mock";
 
 import "./core/use"; // 引入配置
+import "./permission"; // permission control
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;

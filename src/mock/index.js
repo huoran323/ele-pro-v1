@@ -1,4 +1,4 @@
-import Mock from "mockjs2";
+import Mock from "mockjs";
 
 if (process.env.NODE_ENV !== "production") {
   // 使用同步加载依赖

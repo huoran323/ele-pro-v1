@@ -1,4 +1,4 @@
-import Mock from "mockjs2";
+import Mock from "mockjs";
 import { builder, getBody } from "../util";
 
 const username = ["admin", "user", "super"];
