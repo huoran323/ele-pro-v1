@@ -7,3 +7,17 @@ export const login = parameter => {
     data: parameter
   });
 };
+
+export const getInfo = () => {
+  return axios({
+    url: "/user/info",
+    method: "get"
+  });
+};
+
+export const logout = () => {
+  return axios({
+    url: "/auth/logout",
+    method: "post"
+  });
+};

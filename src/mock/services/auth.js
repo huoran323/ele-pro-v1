@@ -13,6 +13,32 @@ const login = options => {
 
   return builder(
     {
+      // id: Mock.mock("@guid"),
+      // name: Mock.mock("@name"),
+      // username: "admin",
+      // password: "",
+      // avatar:
+      //   "https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png",
+      // status: 1,
+      // telephone: "",
+      // lastLoginIp: "27.154.74.117",
+      // lastLoginTime: 1534837621348,
+      // creatorId: "admin",
+      // createTime: 1497160610259,
+      // deleted: 0,
+      // roleId: "admin",
+      // lang: "zh-CN",
+      token: "4291d7da9005377ec9aec4a71ea837f"
+    },
+    "",
+    200,
+    { "Custom-Header": Mock.mock("@guid") }
+  );
+};
+
+const userInfo = () => {
+  return builder(
+    {
       id: Mock.mock("@guid"),
       name: Mock.mock("@name"),
       username: "admin",
@@ -26,14 +52,19 @@ const login = options => {
       creatorId: "admin",
       createTime: 1497160610259,
       deleted: 0,
+      roles: ["admin"],
       roleId: "admin",
-      lang: "zh-CN",
-      token: "4291d7da9005377ec9aec4a71ea837f"
+      lang: "zh-CN"
     },
-    "",
-    200,
-    { "Custom-Header": Mock.mock("@guid") }
+    "请求成功",
+    200
   );
 };
 
+const logout = () => {
+  return builder({}, "[测试接口] 注销成功");
+};
+
 Mock.mock(/\/auth\/login/, "post", login);
+Mock.mock(/\/api\/user\/info/, "get", userInfo);
+Mock.mock(/\/auth\/logout/, "post", logout);

@@ -1,39 +1,39 @@
 import { constantRouterMap, asyncRouterMap } from "@/config/router.config";
 
 /**
- * 过滤账户是否拥有某一个权限，并将菜单从加载列表移除
- *
- * @param permission
+ * Use meta.role to determine if the current user has permission
+ * @param roles
  * @param route
- * @returns {boolean}
  */
-const hasPermission = (permission, route) => {
-  if (route.meta && route.meta.permission) {
-    let flag = false;
-    for (let i = 0, len = permission.length; i < len; i++) {
-      flag = route.meta.permission.includes(permission[i]);
-      if (flag) {
-        return true;
-      }
-    }
-    return false;
+function hasPermission(roles, route) {
+  if (route.meta && route.meta.roles) {
+    return roles.some(role => route.meta.roles.includes(role));
+  } else {
+    return true;
   }
-  return true;
-};
+}
 
 // 筛选符合权限的路由
-const filterAsyncRouter = (routerMap, roles) => {
-  const accessedRouters = routerMap.filter(route => {
-    if (hasPermission(roles.permissionList, route)) {
-      if (route.children && route.children.length) {
-        route.children = filterAsyncRouter(route.children, roles);
+/**
+ * Filter asynchronous routing tables by recursion
+ * @param routes asyncRoutes
+ * @param roles
+ */
+export function filterAsyncRoutes(routes, roles) {
+  const res = [];
+
+  routes.forEach(route => {
+    const tmp = { ...route };
+    if (hasPermission(roles, tmp)) {
+      if (tmp.children) {
+        tmp.children = filterAsyncRoutes(tmp.children, roles);
       }
-      return true;
+      res.push(tmp);
     }
-    return false;
   });
-  return accessedRouters;
-};
+
+  return res;
+}
 
 const permission = {
   state: {
@@ -47,14 +47,16 @@ const permission = {
     }
   },
   actions: {
-    GenerateRoutes({ commit }) {
+    GenerateRoutes({ commit }, roles) {
       return new Promise(resolve => {
-        // const { roles } = data; //从permission.js中分发过来的角色参数
-        // const accessedRouters = filterAsyncRouter(asyncRouterMap);
-        // console.log("accessedRouters ---", asyncRouterMap);
-
-        commit("SET_ROUTERS", asyncRouterMap);
-        resolve();
+        let accessedRoutes;
+        if (roles.includes("admin")) {
+          accessedRoutes = asyncRouterMap || [];
+        } else {
+          accessedRoutes = filterAsyncRoutes(asyncRouterMap, roles);
+        }
+        commit("SET_ROUTERS", accessedRoutes);
+        resolve(accessedRoutes);
       });
     }
   }

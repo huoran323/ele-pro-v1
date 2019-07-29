@@ -10,7 +10,12 @@ import { Notification } from "element-ui";
 
 const service = axios.create({
   baseURL: "/api",
-  timeout: 6000 //请求超时时间
+  timeout: 6000, //请求超时时间
+  responseType: "json",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+    // "Content-Type": "application/json"
+  }
 });
 
 const err = error => {
@@ -48,6 +53,10 @@ service.interceptors.request.use(config => {
   if (token) {
     config.headers["Access-Token"] = token; // 让每个请求携带自定义 token 请根据实际情况自行修改
   }
+  // config.data = qs.stringify(config.data, {
+  //   arrayFormat: "indices",
+  //   allowDots: true
+  // });
 
   return config;
 }, err);

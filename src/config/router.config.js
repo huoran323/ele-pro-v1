@@ -5,7 +5,7 @@ export const asyncRouterMap = [
     path: "/",
     name: "index",
     component: BasicLayout,
-    meta: { title: "首页" },
+    meta: { title: "首页", roles: ["admin", "editor"] },
     redirect: "/dashboard/workplace",
     children: [
       {
@@ -13,7 +13,11 @@ export const asyncRouterMap = [
         name: "dashboard",
         redirect: "/dashboard/workplace",
         component: RouteView,
-        meta: { title: "仪表盘", keepAlive: true },
+        meta: {
+          title: "仪表盘",
+          keepAlive: true,
+          roles: ["admin", "editor"]
+        },
         children: [
           {
             path: "/dashboard/workplace",
