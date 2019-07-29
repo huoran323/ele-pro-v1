@@ -1,8 +1,12 @@
 <template>
   <div>
     <el-container>
-      <el-header></el-header>
+      <el-aside width="200px">
+        <side-menu :menus="menus"></side-menu>
+      </el-aside>
+
       <el-container>
+        <el-header></el-header>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -12,7 +16,25 @@
   </div>
 </template>
 <script>
-export default {};
+import SideMenu from "@/components/Menu/SideMenu";
+import { mapState } from "vuex";
+export default {
+  components: { SideMenu },
+  data() {
+    return {
+      menus: []
+    };
+  },
+  computed: {
+    ...mapState({
+      // 动态主路由
+      mainMenu: state => state.permission.addRouters
+    })
+  },
+  created() {
+    this.menus = this.mainMenu.find(item => item.path === "/").children;
+  }
+};
 </script>
 <style>
 </style>

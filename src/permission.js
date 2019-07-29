@@ -13,7 +13,7 @@ const whiteList = ["login"]; // no redirect whitelist
 // from: Route: 当前导航正要离开的路由;
 // next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
 router.beforeEach(async (to, from, next) => {
-  //NProgress.start(); //进度条开始
+  NProgress.start(); //进度条开始
 
   //判断token
   if (Vue.ls.get(ACCESS_TOKEN)) {
@@ -23,7 +23,7 @@ router.beforeEach(async (to, from, next) => {
       // 下一个要进入的路由
 
       next({ path: "/dashboard/workplace" });
-      // NProgress.done();
+      NProgress.done();
     } else {
       const hasRoles = store.getters.roles && store.getters.roles.length > 0;
       if (hasRoles) {
@@ -57,7 +57,7 @@ router.beforeEach(async (to, from, next) => {
       next();
     } else {
       next({ path: "/user/login" });
-      // NProgress.done(); // if current page is login will not trigger afterEach hook, so manually handle it
+      NProgress.done(); // if current page is login will not trigger afterEach hook, so manually handle it
     }
   }
 });
