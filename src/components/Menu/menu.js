@@ -1,7 +1,5 @@
 import { Menu, Submenu, MenuItem, Icon } from "element-ui";
 
-// const { MenuItem, SubMenu } = Menu;
-
 export default {
   name: "SMenu",
   props: {
