@@ -9,9 +9,7 @@ export default {
     }
   },
   data() {
-    return {
-      bgColor: "#304156"
-    };
+    return {};
   },
   computed: {
     activeMenu() {}
@@ -92,10 +90,11 @@ export default {
         mode="vertical"
         router
         default-active={this.$route.path}
-        background-color={this.bgColor}
+        background-color="#304156"
         text-color="#bfcbd9"
         active-text-color="#409EFF"
         unique-opened={true}
+        class="el-menu"
       >
         {menuTree}
       </el-menu>
@@ -104,4 +103,7 @@ export default {
 };
 </script>
 <style lane="less" scoped>
+.el-menu {
+  border-right: solid 0px #e6e6e6;
+}
 </style>

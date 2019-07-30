@@ -9,6 +9,8 @@ import "element-ui/lib/theme-chalk/index.css";
 
 import { VueAxios } from "./utils/request";
 
+import "@/styles/index.less";
+
 // mock
 import "./mock";
 
