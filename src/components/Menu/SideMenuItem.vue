@@ -1,17 +1,21 @@
-import { Menu, Submenu, MenuItem, Icon } from "element-ui";
-
+<script>
 export default {
-  name: "SMenu",
+  name: "SideMenuItem",
+  components: {},
   props: {
     menu: {
       type: Array,
       required: true
     }
   },
-  data() {},
-  computed: {},
-  mounted: {},
-  watch: {},
+  data() {
+    return {
+      bgColor: "#304156"
+    };
+  },
+  computed: {
+    activeMenu() {}
+  },
   methods: {
     renderItem(menu) {
       if (!menu.hidden) {
@@ -40,12 +44,10 @@ export default {
       }
 
       return (
-        <MenuItem {...{ key: menu.path }}>
-          <tag {...{ props, attrs }}>
-            {this.renderIcon(menu.meta.icon)}
-            <span>{menu.meta.title}</span>
-          </tag>
-        </MenuItem>
+        <el-menu-item index={menu.path}>
+          {this.renderIcon(menu.meta.icon)}
+          <span>{menu.meta.title}</span>
+        </el-menu-item>
       );
     },
 
@@ -58,13 +60,13 @@ export default {
         });
       }
       return (
-        <Submenu>
+        <el-submenu index={menu.path}>
           <span slot="title">
             {this.renderIcon(menu.meta.icon)}
             <span>{menu.meta.title}</span>
           </span>
           {itemArr}
-        </Submenu>
+        </el-submenu>
       );
     },
     // 渲染菜单前面的图标
@@ -72,9 +74,7 @@ export default {
       if (icon === "none" || icon === undefined) {
         return null;
       }
-      const props = {};
-      typeof icon === "object" ? (props.component = icon) : (props.type = icon);
-      return <Icon {...{ props }} />;
+      return <i class={icon} />;
     }
   },
   render() {
@@ -87,6 +87,21 @@ export default {
       return this.renderItem(item);
     });
 
-    return <Menu>{menuTree}</Menu>;
+    return (
+      <el-menu
+        mode="vertical"
+        router
+        default-active={this.$route.path}
+        background-color={this.bgColor}
+        text-color="#bfcbd9"
+        active-text-color="#409EFF"
+        unique-opened={true}
+      >
+        {menuTree}
+      </el-menu>
+    );
   }
 };
+</script>
+<style lane="less" scoped>
+</style>

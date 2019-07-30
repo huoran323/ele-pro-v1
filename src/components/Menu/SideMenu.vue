@@ -1,12 +1,16 @@
 <template>
   <div>
-    <s-menu :menu="menus" style="padding: 16px 0px;"></s-menu>
+    <Logo />
+    <side-menu-item :menu="menus"></side-menu-item>
   </div>
 </template>
 <script>
-import SMenu from "./index";
+import { mapState } from "vuex";
+import Logo from "./Logo";
+import SideMenuItem from "./SideMenuItem";
+
 export default {
-  components: { SMenu },
+  components: { Logo, SideMenuItem },
   props: {
     menus: {
       type: Array,

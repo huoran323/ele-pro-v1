@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <el-aside width="200px">
-        <side-menu :menus="menus" mode="vertical"></side-menu>
+        <SideMenu :menus="menus"></SideMenu>
       </el-aside>
 
       <el-container>

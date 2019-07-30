@@ -8,6 +8,7 @@ export const asyncRouterMap = [
     meta: { title: "首页", roles: ["admin", "editor"] },
     redirect: "/dashboard/workplace",
     children: [
+      //dashboard
       {
         path: "/dashboard",
         name: "dashboard",
@@ -16,6 +17,7 @@ export const asyncRouterMap = [
         meta: {
           title: "仪表盘",
           keepAlive: true,
+          icon: "el-icon-s-help",
           roles: ["admin", "editor"]
         },
         children: [
@@ -26,6 +28,29 @@ export const asyncRouterMap = [
             meta: {
               title: "工作台",
               keepAlive: true,
+              roles: ["admin", "editor"]
+            }
+          }
+        ]
+      },
+      // form
+      {
+        path: "/form",
+        name: "form",
+        redirect: "/form/base-form",
+        component: RouteView,
+        meta: {
+          title: "表单页",
+          icon: "el-icon-info",
+          roles: ["admin", "editor"]
+        },
+        children: [
+          {
+            path: "/form/base-form",
+            name: "BaseForm",
+            component: () => import("@/views/form/BasicForm"),
+            meta: {
+              title: "基础表单",
               roles: ["admin", "editor"]
             }
           }
