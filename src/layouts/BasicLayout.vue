@@ -5,7 +5,9 @@
     </el-aside>
 
     <el-container>
-      <el-header></el-header>
+      <el-header class="container-header">
+        <global-header :collapsed="true" />
+      </el-header>
       <el-main>
         <router-view></router-view>
       </el-main>
@@ -15,9 +17,10 @@
 </template>
 <script>
 import SideMenu from "@/components/Menu/SideMenu";
+import GlobalHeader from "@/components/GlobalHeader/GlobalHeader";
 import { mapState } from "vuex";
 export default {
-  components: { SideMenu },
+  components: { SideMenu, GlobalHeader },
   data() {
     return {
       menus: []
@@ -64,6 +67,10 @@ export default {
       // z-index: 1001;
       // overflow: hidden;
     }
+  }
+
+  .container-header {
+    border-bottom: solid 1px #e6e6e6;
   }
 }
 </style>
