@@ -2,7 +2,7 @@
   <transition>
     <div>
       <i
-        :class="collapsed ? 'el-icon-s-fold' : 'el-icon-s-unfold'"
+        :class="collapsed ?  'el-icon-s-unfold' : 'el-icon-s-fold'"
         @click="toggle"
         class="trigger"
       />
@@ -21,7 +21,9 @@ export default {
     }
   },
   methods: {
-    toggle() {}
+    toggle() {
+      this.$emit("toggle");
+    }
   }
 };
 </script>

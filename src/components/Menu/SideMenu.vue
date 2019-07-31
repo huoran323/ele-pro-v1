@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Logo />
-    <side-menu-item :menu="menus"></side-menu-item>
+    <Logo :collapsed="collapsed" />
+    <side-menu-item :menu="menus" :collapsed="collapsed"></side-menu-item>
   </div>
 </template>
 <script>
@@ -15,6 +15,11 @@ export default {
     menus: {
       type: Array,
       required: true
+    },
+    collapsed: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   }
 };

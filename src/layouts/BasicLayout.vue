@@ -1,12 +1,12 @@
 <template>
-  <el-container class="container">
-    <el-aside class="container-side">
-      <SideMenu class="side-menu" :menus="menus"></SideMenu>
+  <el-container :class="classObj" class="container">
+    <el-aside class="container-side" :style="{width:'auto'}">
+      <SideMenu class="side-menu" :menus="menus" :collapsed="collapsed"></SideMenu>
     </el-aside>
 
     <el-container>
       <el-header class="container-header">
-        <global-header :collapsed="true" />
+        <global-header :collapsed="collapsed" @toggle="toggle" />
       </el-header>
       <el-main>
         <router-view></router-view>
@@ -23,6 +23,7 @@ export default {
   components: { SideMenu, GlobalHeader },
   data() {
     return {
+      collapsed: false,
       menus: []
     };
   },
@@ -30,10 +31,22 @@ export default {
     ...mapState({
       // 动态主路由
       mainMenu: state => state.permission.addRouters
-    })
+    }),
+    classObj() {
+      return {
+        hideSidebar: !this.collapsed,
+        openSidebar: this.collapsed
+        // withoutAnimation: this.sidebar.withoutAnimation,
+      };
+    }
   },
   created() {
     this.menus = this.mainMenu.find(item => item.path === "/").children;
+  },
+  methods: {
+    toggle() {
+      this.collapsed = !this.collapsed;
+    }
   }
 };
 </script>
@@ -43,6 +56,15 @@ export default {
   height: 100%;
   position: relative;
 
+  // .openSidebar {
+  //   position: fixed;
+  //   top: 0;
+  // }
+
+  // .hideSidebar .fixed-header {
+  //   width: calc(100% - 54px);
+  // }
+
   .container-side {
     background-color: #304156;
     color: #333;
@@ -50,22 +72,14 @@ export default {
     line-height: 200px;
     height: 100%;
     width: 100%;
-    font-size: 18px;
+    font-size: 0px;
+
+    overflow: hidden;
+    transition: width 800ms;
 
     .side-menu {
-      // transition: width 0.28s;
-      // width: $sideBarWidth !important;
-      // background-color: $menuBg;
-      // width: 100%;
-      // height: 100%;
-      // position: fixed;
       border-right: solid 0px #e6e6e6 !important;
       font-size: 18px;
-      // top: 0;
-      // bottom: 0;
-      // left: 0;
-      // z-index: 1001;
-      // overflow: hidden;
     }
   }
 

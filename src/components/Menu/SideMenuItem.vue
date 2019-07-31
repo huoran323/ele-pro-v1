@@ -6,6 +6,11 @@ export default {
     menu: {
       type: Array,
       required: true
+    },
+    collapsed: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data() {
@@ -57,12 +62,13 @@ export default {
           itemArr.push(this.renderItem(item));
         });
       }
+
       return (
         <el-submenu index={menu.path}>
-          <span slot="title">
+          <div slot="title">
             {this.renderIcon(menu.meta.icon)}
             <span>{menu.meta.title}</span>
-          </span>
+          </div>
           {itemArr}
         </el-submenu>
       );
@@ -72,7 +78,7 @@ export default {
       if (icon === "none" || icon === undefined) {
         return null;
       }
-      return <i class={icon} />;
+      return <i class={icon}></i>;
     }
   },
   render() {
@@ -89,12 +95,14 @@ export default {
       <el-menu
         mode="vertical"
         router
+        collapse={this.collapsed}
         default-active={this.$route.path}
         background-color="#304156"
         text-color="#bfcbd9"
         active-text-color="#409EFF"
         unique-opened={true}
         class="el-menu"
+        collapse-transition={false}
       >
         {menuTree}
       </el-menu>
@@ -104,6 +112,10 @@ export default {
 </script>
 <style lane="less" scoped>
 .el-menu {
-  border-right: solid 0px #e6e6e6;
+  border-right: none !important;
+}
+.el-menu:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
 </style>

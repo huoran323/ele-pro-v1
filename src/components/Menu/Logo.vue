@@ -1,7 +1,7 @@
 <template>
   <div class="logo-container">
     <transition name="logoFade">
-      <router-link v-if="collapse" class="logo-link" to="/">
+      <router-link v-if="collapsed" class="logo-link" to="/">
         <img v-if="logo" :src="logo" class="logo" />
         <h1 v-else class="title">{{title}}</h1>
       </router-link>
@@ -17,7 +17,7 @@ import logo from "@/assets/logo.png";
 export default {
   name: "SideMenuLogo",
   props: {
-    collapse: {
+    collapsed: {
       type: Boolean,
       required: false
     }
