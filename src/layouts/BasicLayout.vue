@@ -9,6 +9,7 @@
         <global-header :collapsed="collapsed" @toggle="toggle" />
       </el-header>
       <el-main>
+        <multi-tab></multi-tab>
         <router-view></router-view>
       </el-main>
       <el-footer></el-footer>
@@ -18,9 +19,10 @@
 <script>
 import SideMenu from "@/components/Menu/SideMenu";
 import GlobalHeader from "@/components/GlobalHeader/GlobalHeader";
+import MultiTab from "@/components/MultiTab";
 import { mapState } from "vuex";
 export default {
-  components: { SideMenu, GlobalHeader },
+  components: { SideMenu, GlobalHeader, MultiTab },
   data() {
     return {
       collapsed: false,
