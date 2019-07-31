@@ -68,7 +68,7 @@ export default {
   // }
 
   .container-side {
-    background-color: #304156;
+    background-color: #001525;
     color: #333;
     text-align: left;
     line-height: 200px;

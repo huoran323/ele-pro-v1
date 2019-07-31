@@ -97,9 +97,9 @@ export default {
         router
         collapse={this.collapsed}
         default-active={this.$route.path}
-        background-color="#304156"
+        background-color="#001525"
         text-color="#bfcbd9"
-        active-text-color="#409EFF"
+        active-text-color="#FFFFFF"
         unique-opened={true}
         class="el-menu"
         collapse-transition={false}
@@ -117,5 +117,8 @@ export default {
 .el-menu:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+}
+.el-menu-item.is-active {
+  background: #1585ff !important;
 }
 </style>
