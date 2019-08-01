@@ -1,4 +1,4 @@
-import { BasicLayout, RouteView, UserLayout } from "@/layouts";
+import { BasicLayout, RouteView, UserLayout, PageView } from "@/layouts";
 
 export const asyncRouterMap = [
   {
@@ -38,7 +38,7 @@ export const asyncRouterMap = [
         path: "/form",
         name: "form",
         redirect: "/form/base-form",
-        component: RouteView,
+        component: PageView,
         meta: {
           title: "表单页",
           icon: "el-icon-info",

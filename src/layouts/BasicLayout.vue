@@ -4,13 +4,15 @@
       <SideMenu class="side-menu" :menus="menus" :collapsed="collapsed"></SideMenu>
     </el-aside>
 
-    <el-container>
+    <el-container class="container-main">
       <el-header class="container-header">
         <global-header :collapsed="collapsed" @toggle="toggle" />
       </el-header>
       <el-main>
         <multi-tab></multi-tab>
-        <router-view></router-view>
+        <div class="main">
+          <router-view></router-view>
+        </div>
       </el-main>
       <el-footer></el-footer>
     </el-container>
@@ -85,8 +87,30 @@ export default {
     }
   }
 
+  .container-main {
+    position: relative;
+    // height: 100%;
+    // width: 100%;
+  }
+
   .container-header {
     border-bottom: solid 1px #e6e6e6;
+  }
+
+  .el-main {
+    position: relative;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    width: 100%;
+  }
+
+  .main {
+    padding: 0px 0px 0 0px;
+    background-color: #eef0f3;
+    position: relative;
+    // height: calc(100%-60px);
+    height: 80%;
+    width: 100%;
   }
 }
 </style>
