@@ -106,7 +106,7 @@ export default {
   .main {
     padding: 0px 0px 0px 0px;
     // 设置主体内容的背景色
-    // background-color: #eef0f3;
+    background-color: #eef0f3;
     position: relative;
     // height: calc(100%-60px);
     height: 100%;

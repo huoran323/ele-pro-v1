@@ -1,6 +1,7 @@
 <template>
   <div class="user-wrapper">
     <div class="content-box">
+      <notice-icon class="action"></notice-icon>
       <el-dropdown>
         <span class="action">
           <!-- 头像 -->
@@ -39,8 +40,10 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import NoticeIcon from "@/components/NoticeIcon";
 export default {
   name: "UserMenu",
+  components: { NoticeIcon },
   methods: {
     ...mapActions(["Logout"]),
     ...mapGetters(["nickname", "avatar"]),
