@@ -6,13 +6,15 @@
         @click="toggle"
         class="trigger"
       />
+      <user-menu></user-menu>
     </div>
   </transition>
 </template>
 <script>
+import UserMenu from "@/components/Tools/UserMenu";
 export default {
   name: "GlobalHeader",
-  components: {},
+  components: { UserMenu },
   props: {
     collapsed: {
       type: Boolean,

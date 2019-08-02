@@ -5,7 +5,12 @@ import { ACCESS_TOKEN } from "@/store/mutation-types";
 
 const user = {
   state: {
+    // token
     token: "",
+    // 用户名称
+    name: "",
+    // 用户头像
+    avatar: "",
     roles: []
   },
   mutations: {
@@ -15,6 +20,12 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles;
+    },
+    SET_NAME: (state, name) => {
+      state.name = name;
+    },
+    SET_AVATAR: (state, avatar) => {
+      state.avatar = avatar;
     }
   },
   actions: {
@@ -43,6 +54,8 @@ const user = {
             const { roles } = result;
 
             commit("SET_ROLES", roles);
+            commit("SET_NAME", result.name);
+            commit("SET_AVATAR", result.avatar);
             resolve(result);
           })
           .catch(error => {
