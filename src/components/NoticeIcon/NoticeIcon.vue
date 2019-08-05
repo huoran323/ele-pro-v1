@@ -1,7 +1,7 @@
 <template>
   <el-popover
     placement="bottom"
-    title="标题"
+    title="消息"
     width="200"
     trigger="click"
     content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"

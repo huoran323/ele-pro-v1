@@ -16,11 +16,17 @@ export default {
     } = this;
     const inKeep = (
       // <!-- 失活的组件将会被缓存！-->
-      <keep-alive>
-        <router-view />
-      </keep-alive>
+      <div class="content">
+        <keep-alive>
+          <router-view />
+        </keep-alive>
+      </div>
     );
-    const notKeep = <router-view />;
+    const notKeep = (
+      <div class="content">
+        <router-view />
+      </div>
+    );
     // 这里增加了 multiTab 的判断，当开启了 multiTab 时
     // 应当全部组件皆缓存，否则会导致切换页面后页面还原成原始状态
     // 若确实不需要，可改为 return meta.keepAlive ? inKeep : notKeep
@@ -31,3 +37,9 @@ export default {
   }
 };
 </script>
+<style lang="less" scoped>
+.content {
+  padding: 0px 24px 0;
+}
+</style>
+
