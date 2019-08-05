@@ -22,7 +22,7 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === "/user/login") {
       // 下一个要进入的路由
 
-      next({ path: "/dashboard/workplace" });
+      next({ path: "/dashboard/analysis" });
       NProgress.done();
     } else {
       const hasRoles = store.getters.roles && store.getters.roles.length > 0;

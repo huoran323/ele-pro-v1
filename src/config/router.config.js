@@ -6,13 +6,13 @@ export const asyncRouterMap = [
     name: "index",
     component: BasicLayout,
     meta: { title: "首页", roles: ["admin", "editor"] },
-    redirect: "/dashboard/workplace",
+    redirect: "/dashboard/analysis",
     children: [
       //dashboard
       {
         path: "/dashboard",
         name: "dashboard",
-        redirect: "/dashboard/workplace",
+        redirect: "/dashboard/analysis",
         component: RouteView,
         meta: {
           title: "仪表盘",
@@ -21,6 +21,12 @@ export const asyncRouterMap = [
           roles: ["admin", "editor"]
         },
         children: [
+          {
+            path: "/dashboard/analysis",
+            name: "Analysis",
+            component: () => import("@/views/dashboard/Analysis"),
+            meta: { title: "分析页", keepAlive: false }
+          },
           {
             path: "/dashboard/workplace",
             name: "Workplace",

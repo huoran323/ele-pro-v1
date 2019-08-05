@@ -15,6 +15,13 @@ export const getInfo = () => {
   });
 };
 
+export const getRouteList = () => {
+  return axios({
+    url: "/user/routelist",
+    method: "get"
+  });
+};
+
 export const logout = () => {
   return axios({
     url: "/auth/logout",

@@ -1,3 +1,6 @@
+import Vue from "vue";
+
+import { getRouteList } from "@/api/login";
 import { constantRouterMap, asyncRouterMap } from "@/config/router.config";
 
 /**
@@ -35,6 +38,38 @@ export function filterAsyncRoutes(routes, roles) {
   return res;
 }
 
+export function hasRoute(requestList, filterRoute) {
+  // return requestList.includes(filterRoute.path);
+  return requestList.some(item => item.path == filterRoute.path);
+}
+
+const routeLists = [];
+export function splitRoutes(routes) {
+  routes.map(list => {
+    if (list.children) {
+      splitRoutes(list.children);
+    }
+    routeLists.unshift({ path: list.path });
+  });
+
+  return routeLists;
+}
+
+export function filterAsyncRouteList(routes) {
+  const res = [];
+
+  asyncRouterMap.forEach(route => {
+    if (hasRoute(routes, route)) {
+      if (route.children) {
+        route.children = filterAsyncRouteList(route.children);
+      }
+      res.push(route);
+    }
+  });
+  console.log("res", res);
+  return res;
+}
+
 const permission = {
   state: {
     routers: constantRouterMap,
@@ -48,17 +83,42 @@ const permission = {
   },
   actions: {
     GenerateRoutes({ commit }, roles) {
-      return new Promise(resolve => {
-        let accessedRoutes;
-        if (roles.includes("admin")) {
-          accessedRoutes = asyncRouterMap || [];
-        } else {
-          accessedRoutes = filterAsyncRoutes(asyncRouterMap, roles);
-        }
-        commit("SET_ROUTERS", accessedRoutes);
-        resolve(accessedRoutes);
+      return new Promise((resolve, reject) => {
+        getRouteList()
+          .then(response => {
+            let accessedRoutes;
+            const { result } = response;
+            const routes = splitRoutes(result);
+            accessedRoutes = filterAsyncRouteList(routes);
+            commit("SET_ROUTERS", accessedRoutes);
+            resolve(accessedRoutes);
+          })
+          .catch(error => {
+            reject(error);
+          });
+
+        // let accessedRoutes;
+        // if (roles.includes("admin")) {
+        //   accessedRoutes = asyncRouterMap || [];
+        // } else {
+        //   accessedRoutes = filterAsyncRoutes(asyncRouterMap, roles);
+        // }
+        // commit("SET_ROUTERS", accessedRoutes);
+        // resolve(accessedRoutes);
       });
     }
+    // GenerateRoutes({ commit }, roles) {
+    //   return new Promise(resolve => {
+    //     let accessedRoutes;
+    //     if (roles.includes("admin")) {
+    //       accessedRoutes = asyncRouterMap || [];
+    //     } else {
+    //       accessedRoutes = filterAsyncRoutes(asyncRouterMap, roles);
+    //     }
+    //     commit("SET_ROUTERS", accessedRoutes);
+    //     resolve(accessedRoutes);
+    //   });
+    // }
   }
 };
 
