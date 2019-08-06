@@ -1,5 +1,5 @@
 import Mock from "mockjs";
-import { builder, getBody } from "../util";
+import { builder } from "../util";
 
 const getRouteList = () => {
   return builder(
@@ -23,6 +23,18 @@ const getRouteList = () => {
               {
                 path: "/dashboard/workplace",
                 title: "工作台",
+                roles: []
+              }
+            ]
+          },
+          {
+            path: "/form",
+            title: "表单页",
+            roles: [],
+            children: [
+              {
+                path: "/form/base-form",
+                title: "基础表单",
                 roles: []
               }
             ]

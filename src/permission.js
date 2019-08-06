@@ -6,6 +6,8 @@ import NProgress from "nprogress"; // 引入加载进度条
 import "nprogress/nprogress.css"; // progress bar style
 import { ACCESS_TOKEN } from "@/store/mutation-types";
 
+import { mapGetters } from "vuex";
+
 const whiteList = ["login"]; // no redirect whitelist
 
 // 路由全局前置守卫,当一个导航触发时，全局前置守卫按照创建顺序调用。守卫是异步解析执行，此时导航在所有守卫 resolve 完之前一直处于 等待中。
@@ -21,11 +23,13 @@ router.beforeEach(async (to, from, next) => {
 
     if (to.path === "/user/login") {
       // 下一个要进入的路由
-
-      next({ path: "/dashboard/analysis" });
+      const meta = store.getters.addRoutes[0];
+      next({ path: meta.path });
+      // next({ path: "/dashboard/analysis" });
       NProgress.done();
     } else {
       const hasRoles = store.getters.roles && store.getters.roles.length > 0;
+
       if (hasRoles) {
         next();
       } else {
@@ -52,6 +56,7 @@ router.beforeEach(async (to, from, next) => {
       }
     }
   } else {
+    debugger;
     if (whiteList.includes(to.name)) {
       // 在免登录白名单，直接进入
       next();
