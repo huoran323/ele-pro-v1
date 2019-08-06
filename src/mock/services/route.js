@@ -40,6 +40,10 @@ const getRouteList = () => {
             ]
           }
         ]
+      },
+      {
+        path: "/exception/404",
+        title: ""
       }
     ],
     "请求成功",

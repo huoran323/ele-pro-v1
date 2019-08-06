@@ -10,6 +10,7 @@
       </el-header>
       <el-main>
         <multi-tab></multi-tab>
+        <!-- <breadcrumb></breadcrumb> -->
         <div class="main">
           <router-view></router-view>
         </div>
@@ -18,12 +19,13 @@
   </el-container>
 </template>
 <script>
+import Breadcrumb from "@/components/Tools/Breadcrumb";
 import SideMenu from "@/components/Menu/SideMenu";
 import GlobalHeader from "@/components/GlobalHeader/GlobalHeader";
 import MultiTab from "@/components/MultiTab";
 import { mapState } from "vuex";
 export default {
-  components: { SideMenu, GlobalHeader, MultiTab },
+  components: { SideMenu, GlobalHeader, MultiTab, Breadcrumb },
   data() {
     return {
       collapsed: false,
@@ -44,7 +46,9 @@ export default {
     }
   },
   created() {
+    // 获取左侧菜单栏
     this.menus = this.mainMenu.find(item => item.path === "/").children;
+    // this.menus = this.mainMenu;
   },
   methods: {
     toggle() {
