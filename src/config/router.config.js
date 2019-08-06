@@ -62,6 +62,23 @@ export const asyncRouterMap = [
           }
         ]
       },
+      // list
+      {
+        path: "/list",
+        name: "list",
+        component: PageView,
+        redirect: "/list/table-list",
+        meta: { title: "列表页", icon: "el-icon-tickets" },
+        children: [
+          {
+            path: "/list/table-list",
+            name: "TableListWrapper",
+            hideChildrenInMenu: true,
+            component: () => import("@/views/list/TableList"),
+            meta: { title: "查询表格", keepAlive: true }
+          }
+        ]
+      },
       {
         path: "/exception",
         name: "exception",

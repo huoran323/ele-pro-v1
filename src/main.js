@@ -16,6 +16,7 @@ import "./mock";
 
 import "./core/use"; // 引入配置
 import "./permission"; // permission control
+import "./utils/filter"; // global filter
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
