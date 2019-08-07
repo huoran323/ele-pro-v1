@@ -18,6 +18,9 @@ import "./core/use"; // 引入配置
 import "./permission"; // permission control
 import "./utils/filter"; // global filter
 
+import echarts from "echarts";
+Vue.prototype.$echarts = echarts;
+
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
 Vue.use(VueAxios);

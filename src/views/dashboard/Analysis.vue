@@ -6,7 +6,9 @@
           <el-tooltip content="指标说明" slot="action" placement="top">
             <i class="el-icon-warning-outline"></i>
           </el-tooltip>
-          <div></div>
+          <div>
+            <!-- <mini-area /> -->
+          </div>
           <template slot="footer">
             日均销售额
             <span>￥ 234.56</span>
@@ -18,6 +20,9 @@
           <el-tooltip content="指标说明" slot="action" placement="top">
             <i class="el-icon-warning-outline"></i>
           </el-tooltip>
+          <div>
+            <mini-area />
+          </div>
           <template slot="footer">
             日访问量
             <span>{{ '1234' | NumberFormat }}</span>
@@ -46,11 +51,12 @@
   </div>
 </template>
 <script>
-import ChartCard from "@/components/Charts/ChartCard";
+import { ChartCard, MiniArea } from "@/components";
 export default {
   name: "Analysis",
   components: {
-    ChartCard
+    ChartCard,
+    MiniArea
   }
 };
 </script>
