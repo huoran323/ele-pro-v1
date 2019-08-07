@@ -34,6 +34,9 @@
           <el-tooltip content="指标说明" slot="action" placement="top">
             <i class="el-icon-warning-outline"></i>
           </el-tooltip>
+          <div>
+            <mini-bar />
+          </div>
           <template slot="footer">
             转化率
             <span>60%</span>
@@ -45,18 +48,23 @@
           <el-tooltip content="指标说明" slot="action" placement="top">
             <i class="el-icon-warning-outline"></i>
           </el-tooltip>
+          <div>
+            <mini-progress />
+          </div>
         </chart-card>
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
-import { ChartCard, MiniArea } from "@/components";
+import { ChartCard, MiniArea, MiniBar, MiniProgress } from "@/components";
 export default {
   name: "Analysis",
   components: {
     ChartCard,
-    MiniArea
+    MiniArea,
+    MiniBar,
+    MiniProgress
   }
 };
 </script>

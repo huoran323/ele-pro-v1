@@ -1,5 +1,5 @@
 <template>
-  <div id="myChart" class="antv-chart-mini"></div>
+  <div class="antv-chart-mini"></div>
 </template>
 <script>
 export default {
@@ -10,7 +10,7 @@ export default {
   methods: {
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById("myChart"));
+      let myChart = this.$echarts.init(this.$el);
       // 绘制图表
       myChart.setOption({
         xAxis: {
@@ -22,6 +22,17 @@ export default {
           type: "value",
           show: false
         },
+        grid: {
+          left: "0%",
+          right: "0%"
+        },
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "none"
+          },
+          padding: [5, 5]
+        },
         series: [
           {
             data: [820, 932, 901, 934, 1290, 1330, 1320, 0, 200],
@@ -29,11 +40,11 @@ export default {
             smooth: true,
             symbol: "none",
             areaStyle: {
-              color: "#137aff"
+              color: "#3398DB"
             },
             lineStyle: {},
             itemStyle: {
-              color: "#137aff",
+              color: "#3398DB",
               borderType: "dotted"
             }
           }
