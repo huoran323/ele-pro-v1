@@ -57,14 +57,21 @@
   </div>
 </template>
 <script>
-import { ChartCard, MiniArea, MiniBar, MiniProgress } from "@/components";
+import {
+  ChartCard,
+  MiniArea,
+  MiniBar,
+  MiniProgress,
+  Trend
+} from "@/components";
 export default {
   name: "Analysis",
   components: {
     ChartCard,
     MiniArea,
     MiniBar,
-    MiniProgress
+    MiniProgress,
+    Trend
   }
 };
 </script>
