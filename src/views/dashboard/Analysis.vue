@@ -69,6 +69,23 @@
         </chart-card>
       </el-col>
     </el-row>
+
+    <el-card>
+      <div>
+        <div class="extra-wrapper">
+          <div class="extra-item">
+            <a>今日</a>
+            <a>本周</a>
+            <a>本月</a>
+            <a>本年</a>
+          </div>
+        </div>
+        <el-tabs>
+          <el-tab-pane label="销售额">销售额</el-tab-pane>
+          <el-tab-pane label="访问量">访问量</el-tab-pane>
+        </el-tabs>
+      </div>
+    </el-card>
   </div>
 </template>
 <script>
@@ -93,5 +110,25 @@ export default {
 <style lang="less" scoped>
 .page-header-index-wide {
   max-width: unset;
+
+  .extra-wrapper {
+    line-height: 40px;
+    padding-right: 24px;
+    float: right;
+    display: block;
+    position: relative;
+    z-index: 999;
+
+    .extra-item {
+      display: block;
+      margin-right: 24px;
+
+      a {
+        margin-left: 24px;
+        color: #3898ff;
+        cursor: pointer;
+      }
+    }
+  }
 }
 </style>
