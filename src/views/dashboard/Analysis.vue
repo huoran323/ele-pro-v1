@@ -7,7 +7,14 @@
             <i class="el-icon-warning-outline"></i>
           </el-tooltip>
           <div>
-            <!-- <mini-area /> -->
+            <trend flag="top" style="margin-right: 16px">
+              <span slot="term">周同比</span>
+              12%
+            </trend>
+            <trend flag="bottom">
+              <span slot="term">日同比</span>
+              11%
+            </trend>
           </div>
           <template slot="footer">
             日均销售额
@@ -51,6 +58,14 @@
           <div>
             <mini-progress />
           </div>
+          <template slot="footer">
+            <trend flag="bottom" style="margin-right: 16px;">
+              <span slot="term">同周比</span>12%
+            </trend>
+            <trend flag="top">
+              <span slot="term">日环比</span>80%
+            </trend>
+          </template>
         </chart-card>
       </el-col>
     </el-row>
