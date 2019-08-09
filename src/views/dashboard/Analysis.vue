@@ -90,7 +90,7 @@
               ></el-date-picker>
             </div>
             <el-tabs v-model="tabItem">
-              <el-tab-pane label="销售额" name="tab1">
+              <el-tab-pane label="销售额" name="tab1" :lazy="true">
                 <el-row :gutter="24">
                   <el-col :xl="16" :md="12" :sm="24">
                     <bar title="销售额排行" v-if="'tab1' === tabItem" />
@@ -98,7 +98,7 @@
                   <el-col :xl="8" :md="12" :sm="24">测试</el-col>
                 </el-row>
               </el-tab-pane>
-              <el-tab-pane label="访问量" name="tab2">
+              <el-tab-pane label="访问量" name="tab2" :lazy="true">
                 <el-row :gutter="24">
                   <el-col :xl="16" :md="12" :sm="24">
                     <bar title="销售额趋势" v-if="'tab2' === tabItem" />
