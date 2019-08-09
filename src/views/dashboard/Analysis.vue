@@ -71,19 +71,34 @@
     </el-row>
 
     <el-card>
-      <div>
-        <div class="extra-wrapper">
-          <div class="extra-item">
-            <a>今日</a>
-            <a>本周</a>
-            <a>本月</a>
-            <a>本年</a>
-          </div>
-        </div>
-        <el-tabs>
-          <el-tab-pane label="销售额">销售额</el-tab-pane>
-          <el-tab-pane label="访问量">访问量</el-tab-pane>
-        </el-tabs>
+      <div style="width:100%;height:100%">
+        <el-row>
+          <el-col :xl="16" :md="12" :sm="24">
+            <el-tabs>
+              <el-tab-pane label="销售额">
+                <bar />
+              </el-tab-pane>
+              <el-tab-pane label="访问量">访问量</el-tab-pane>
+            </el-tabs>
+          </el-col>
+          <el-col :xl="8" :md="12" :sm="24">
+            <div class="extra-wrapper">
+              <div class="extra-item">
+                <a>今日</a>
+                <a>本周</a>
+                <a>本月</a>
+                <a>本年</a>
+              </div>
+              <el-date-picker
+                size="small"
+                type="daterange"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                style="width: 250px"
+              ></el-date-picker>
+            </div>
+          </el-col>
+        </el-row>
       </div>
     </el-card>
   </div>
@@ -94,7 +109,8 @@ import {
   MiniArea,
   MiniBar,
   MiniProgress,
-  Trend
+  Trend,
+  Bar
 } from "@/components";
 export default {
   name: "Analysis",
@@ -103,7 +119,8 @@ export default {
     MiniArea,
     MiniBar,
     MiniProgress,
-    Trend
+    Trend,
+    Bar
   }
 };
 </script>
@@ -120,7 +137,7 @@ export default {
     z-index: 999;
 
     .extra-item {
-      display: block;
+      display: inline-block;
       margin-right: 24px;
 
       a {

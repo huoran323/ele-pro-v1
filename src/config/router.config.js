@@ -16,7 +16,7 @@ export const asyncRouterMap = [
         component: RouteView,
         meta: {
           title: "仪表盘",
-          keepAlive: true,
+          keepAlive: false,
           icon: "el-icon-s-help",
           roles: ["admin", "editor"]
         },
