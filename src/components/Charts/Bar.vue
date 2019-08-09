@@ -1,12 +1,10 @@
 <template>
-  <div class="bar">
-    <h4 :style="{ marginBottom: '20px' }">销售额</h4>
+  <div id="main" class="bar">
+    <h4 :style="{ marginBottom: '20px' }">{{title}}</h4>
     <div id="bar" :style="{height:height,width:width}"></div>
   </div>
 </template>
 <script>
-import { debounce } from "@/utils";
-
 export default {
   name: "Bar",
   props: {
@@ -16,11 +14,15 @@ export default {
     },
     width: {
       type: String,
-      default: "1100px"
+      default: "100%"
     },
     height: {
       type: String,
       default: "300px"
+    },
+    title: {
+      type: String,
+      required: false
     }
   },
   data() {
@@ -28,39 +30,20 @@ export default {
       myChart: null
     };
   },
-  // watch: {
-  //   handler() {
-  //     this.drawBar();
-  //   }
-  // },
+
   mounted() {
     this.drawBar();
-    // this.__resizeHandler = debounce(() => {
-    //   if (this.myChart) {
-    //     this.myChart.resize();
-    //   }
-    // }, 100);
-    // window.addEventListener("resize", this.__resizeHandler);
-    window.addEventListener(
-      "resize",
-      this.myChart.resize({
-        width: "auto",
-        height: 300
-      })
-    );
   },
-  // beforeDestroy() {
-  //   if (!this.myChart) {
-  //     return;
-  //   }
-  //   window.removeEventListener("resize", this.__resizeHandler);
-  //   this.myChart.dispose();
-  //   this.myChart = null;
-  // },
+  beforeDestroy: function() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
   methods: {
     drawBar() {
       let chartDom = document.getElementById("bar");
-      // chartDom.style.width = window.innerWidth / 2 + "px";
       this.myChart = this.$echarts.init(chartDom);
       this.myChart.setOption({
         color: ["#3398DB"],
@@ -113,10 +96,6 @@ export default {
             data: [10, 52, 200, 334, 390, 330, 220, 100, 139, 200, 23, 49]
           }
         ]
-      });
-      this.myChart.resize({
-        width: "auto",
-        height: 300
       });
     }
   }

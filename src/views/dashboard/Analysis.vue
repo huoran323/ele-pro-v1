@@ -71,17 +71,9 @@
     </el-row>
 
     <el-card>
-      <div style="width:100%;height:100%">
+      <div>
         <el-row>
-          <el-col :xl="16" :md="12" :sm="24">
-            <el-tabs>
-              <el-tab-pane label="销售额">
-                <bar />
-              </el-tab-pane>
-              <el-tab-pane label="访问量">访问量</el-tab-pane>
-            </el-tabs>
-          </el-col>
-          <el-col :xl="8" :md="12" :sm="24">
+          <el-col>
             <div class="extra-wrapper">
               <div class="extra-item">
                 <a>今日</a>
@@ -97,6 +89,24 @@
                 style="width: 250px"
               ></el-date-picker>
             </div>
+            <el-tabs v-model="tabItem">
+              <el-tab-pane label="销售额" name="tab1">
+                <el-row :gutter="24">
+                  <el-col :xl="16" :md="12" :sm="24">
+                    <bar title="销售额排行" v-if="'tab1' === tabItem" />
+                  </el-col>
+                  <el-col :xl="8" :md="12" :sm="24">测试</el-col>
+                </el-row>
+              </el-tab-pane>
+              <el-tab-pane label="访问量" name="tab2">
+                <el-row :gutter="24">
+                  <el-col :xl="16" :md="12" :sm="24">
+                    <bar title="销售额趋势" v-if="'tab2' === tabItem" />
+                  </el-col>
+                  <el-col :xl="8" :md="12" :sm="24">测试</el-col>
+                </el-row>
+              </el-tab-pane>
+            </el-tabs>
           </el-col>
         </el-row>
       </div>
@@ -121,6 +131,11 @@ export default {
     MiniProgress,
     Trend,
     Bar
+  },
+  data() {
+    return {
+      tabItem: "tab1"
+    };
   }
 };
 </script>
@@ -147,5 +162,9 @@ export default {
       }
     }
   }
+}
+
+.el-tab-pane > .active {
+  display: block !important;
 }
 </style>
