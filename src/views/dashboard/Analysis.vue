@@ -72,43 +72,43 @@
 
     <el-card>
       <div>
-        <el-row>
-          <el-col>
-            <div class="extra-wrapper">
-              <div class="extra-item">
-                <a>今日</a>
-                <a>本周</a>
-                <a>本月</a>
-                <a>本年</a>
-              </div>
-              <el-date-picker
-                size="small"
-                type="daterange"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-                style="width: 250px"
-              ></el-date-picker>
-            </div>
-            <el-tabs v-model="tabItem">
-              <el-tab-pane label="销售额" name="tab1" :lazy="true">
-                <el-row :gutter="24">
-                  <el-col :xl="16" :md="12" :sm="24">
-                    <bar title="销售额排行" v-if="'tab1' === tabItem" />
-                  </el-col>
-                  <el-col :xl="8" :md="12" :sm="24">测试</el-col>
-                </el-row>
-              </el-tab-pane>
-              <el-tab-pane label="访问量" name="tab2" :lazy="true">
-                <el-row :gutter="24">
-                  <el-col :xl="16" :md="12" :sm="24">
-                    <bar title="销售额趋势" v-if="'tab2' === tabItem" />
-                  </el-col>
-                  <el-col :xl="8" :md="12" :sm="24">测试</el-col>
-                </el-row>
-              </el-tab-pane>
-            </el-tabs>
-          </el-col>
-        </el-row>
+        <div class="extra-wrapper">
+          <div class="extra-item">
+            <a>今日</a>
+            <a>本周</a>
+            <a>本月</a>
+            <a>本年</a>
+          </div>
+          <el-date-picker
+            size="small"
+            type="daterange"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            style="width: 250px"
+          ></el-date-picker>
+        </div>
+        <el-tabs v-model="tabItem">
+          <el-tab-pane label="销售额" name="tab1" :lazy="true">
+            <el-row :gutter="24">
+              <el-col :xl="16" :md="12" :sm="24">
+                <bar title="销售额排行" v-if="'tab1' === tabItem" />
+              </el-col>
+              <el-col :xl="8" :md="12" :sm="24">
+                <rank-list title="门店销售排行榜" :list="rankList1" />
+              </el-col>
+            </el-row>
+          </el-tab-pane>
+          <el-tab-pane label="访问量" name="tab2" :lazy="true">
+            <el-row :gutter="24">
+              <el-col :xl="16" :md="12" :sm="24">
+                <bar title="销售额趋势" v-if="'tab2' === tabItem" />
+              </el-col>
+              <el-col :xl="8" :md="12" :sm="24">
+                <rank-list title="门店销售排行榜" :list="rankList2" />
+              </el-col>
+            </el-row>
+          </el-tab-pane>
+        </el-tabs>
       </div>
     </el-card>
   </div>
@@ -120,8 +120,26 @@ import {
   MiniBar,
   MiniProgress,
   Trend,
-  Bar
+  Bar,
+  RankList
 } from "@/components";
+
+const rankList1 = [];
+for (let i = 0; i < 7; i++) {
+  rankList1.push({
+    name: "白鹭岛 " + (i + 1) + " 号店",
+    total: 1234.56 - i * 100
+  });
+}
+
+const rankList2 = [];
+for (let i = 0; i < 7; i++) {
+  rankList2.push({
+    name: "白岛 " + (i + 1) + " 号店",
+    total: 1234.56 - i * 100
+  });
+}
+
 export default {
   name: "Analysis",
   components: {
@@ -130,11 +148,14 @@ export default {
     MiniBar,
     MiniProgress,
     Trend,
-    Bar
+    Bar,
+    RankList
   },
   data() {
     return {
-      tabItem: "tab1"
+      tabItem: "tab1",
+      rankList1,
+      rankList2
     };
   }
 };
@@ -164,7 +185,9 @@ export default {
   }
 }
 
-.el-tab-pane > .active {
-  display: block !important;
-}
+// .el-tab-pane > .active {
+//   display: block !important;
+// }
 </style>
+
+   

@@ -5,5 +5,6 @@ import MiniProgress from "@/components/Charts/MiniProgress";
 import Bar from "@/components/Charts/Bar";
 
 import Trend from "@/components/Trend";
+import RankList from "@/components/Charts/RankList";
 
-export { ChartCard, MiniArea, MiniBar, MiniProgress, Trend, Bar };
+export { ChartCard, MiniArea, MiniBar, MiniProgress, Trend, Bar, RankList };

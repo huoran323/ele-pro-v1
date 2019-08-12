@@ -5,6 +5,7 @@
   </div>
 </template>
 <script>
+import { setTimeout } from "timers";
 export default {
   name: "Bar",
   props: {
@@ -18,7 +19,7 @@ export default {
     },
     height: {
       type: String,
-      default: "300px"
+      default: "350px"
     },
     title: {
       type: String,
@@ -55,10 +56,10 @@ export default {
           }
         },
         grid: {
-          left: 0,
-          right: 0,
-          bottom: 0,
-          top: 10,
+          left: "0%",
+          right: "0%",
+          bottom: "15%",
+          top: "10%",
           containLabel: true
         },
         xAxis: [
@@ -97,6 +98,12 @@ export default {
           }
         ]
       });
+
+      setTimeout(() => {
+        this.myChart.resize();
+      }, 0);
+      // 根据屏幕尺寸自行调整宽度
+      window.onresize = this.myChart.resize;
     }
   }
 };
@@ -105,6 +112,6 @@ export default {
 .bar {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 350px;
 }
 </style>
