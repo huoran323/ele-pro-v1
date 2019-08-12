@@ -111,6 +111,20 @@
         </el-tabs>
       </div>
     </el-card>
+
+    <el-row :gutter="24">
+      <el-col :sm="24" :md="12" :xl="12">
+        <el-card :style="{ marginTop: '24px', minHeight: '500px' }">
+          <el-row :gutter="68">
+            <el-col :xs="24" :sm="12" :style="{ marginBottom: ' 24px'}"></el-col>
+            <el-col :xs="24" :sm="12" :style="{ marginBottom: ' 24px'}"></el-col>
+          </el-row>
+        </el-card>
+      </el-col>
+      <el-col :sm="24" :md="12" :xl="12">
+        <el-card :style="{ marginTop: '24px', minHeight: '500px' }"></el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 <script>
