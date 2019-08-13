@@ -3,6 +3,7 @@ import MiniArea from "@/components/Charts/MiniArea";
 import MiniBar from "@/components/Charts/MiniBar";
 import MiniProgress from "@/components/Charts/MiniProgress";
 import Bar from "@/components/Charts/Bar";
+import Pie from "@/components/Charts/Pie";
 
 import Trend from "@/components/Trend";
 import RankList from "@/components/Charts/RankList";
@@ -16,6 +17,7 @@ export {
   MiniProgress,
   Trend,
   Bar,
+  Pie,
   RankList,
   NumberInfo,
   Pagination

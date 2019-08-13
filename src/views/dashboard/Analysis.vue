@@ -186,7 +186,20 @@
         </el-card>
       </el-col>
       <el-col :sm="24" :md="12" :xl="12">
-        <el-card :style="{ marginTop: '24px', minHeight: '500px' }"></el-card>
+        <el-card :style="{ marginTop: '24px', minHeight: '568px', marginBottom: '24px' }">
+          <div slot="header">
+            <span>销售额类别占比</span>
+            <el-radio-group v-model="radio1" :style="{float: 'right', marginTop: '-9px'}">
+              <el-radio-button label="全部渠道"></el-radio-button>
+              <el-radio-button label="线上"></el-radio-button>
+              <el-radio-button label="门店"></el-radio-button>
+            </el-radio-group>
+          </div>
+          <h4>销售额</h4>
+          <div>
+            <pie />
+          </div>
+        </el-card>
       </el-col>
     </el-row>
   </div>
@@ -199,6 +212,7 @@ import {
   MiniProgress,
   Trend,
   Bar,
+  Pie,
   RankList,
   NumberInfo
 } from "@/components";
@@ -239,6 +253,7 @@ export default {
     MiniProgress,
     Trend,
     Bar,
+    Pie,
     RankList,
     NumberInfo
   },
@@ -247,7 +262,8 @@ export default {
       tabItem: "tab1",
       rankList1,
       rankList2,
-      searchData
+      searchData,
+      radio1: "全部渠道"
     };
   },
   methods: {
