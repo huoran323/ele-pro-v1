@@ -114,11 +114,75 @@
 
     <el-row :gutter="24">
       <el-col :sm="24" :md="12" :xl="12">
-        <el-card :style="{ marginTop: '24px', minHeight: '500px' }">
+        <el-card :style="{ marginTop: '24px', minHeight: '500px', marginBottom: '24px' }">
+          <div slot="header">
+            <span>线上热门搜索</span>
+          </div>
           <el-row :gutter="68">
-            <el-col :xs="24" :sm="12" :style="{ marginBottom: ' 24px'}"></el-col>
-            <el-col :xs="24" :sm="12" :style="{ marginBottom: ' 24px'}"></el-col>
+            <el-col :xs="24" :sm="12" :style="{ marginBottom: ' 24px'}">
+              <number-info :total="12321" :subTotal="17.1">
+                <span slot="subtitle">
+                  <span>搜索用户数</span>
+                  <el-tooltip
+                    style="margin-left: 10px"
+                    content="指标说明"
+                    slot="action"
+                    placement="top"
+                  >
+                    <i class="el-icon-warning-outline"></i>
+                  </el-tooltip>
+                </span>
+              </number-info>
+              <div>
+                <mini-area :style="{ height: '45px' }" />
+              </div>
+            </el-col>
+            <el-col :xs="24" :sm="12" :style="{ marginBottom: ' 24px'}">
+              <number-info :total="2.7" :subTotal="26.2" flag="bottom">
+                <span slot="subtitle">
+                  <span>人均搜索次数</span>
+                  <el-tooltip
+                    style="margin-left: 10px"
+                    content="指标说明"
+                    slot="action"
+                    placement="top"
+                  >
+                    <i class="el-icon-warning-outline"></i>
+                  </el-tooltip>
+                </span>
+              </number-info>
+              <div>
+                <mini-area :style="{ height: '45px' }" />
+              </div>
+            </el-col>
           </el-row>
+          <div class="el-table-wrapper">
+            <el-table :data="searchData" :border="true" style="margin-top: 8px">
+              <el-table-column label="排名" prop="index"></el-table-column>
+              <el-table-column label="搜索关键词" prop="keyword"></el-table-column>
+              <el-table-column label="用户数" prop="count"></el-table-column>
+              <el-table-column label="周涨幅" prop="range" sortable>
+                <template slot-scope="scope">
+                  <trend
+                    :flag="scope.row.status === 0 ? 'top': 'bottom'"
+                    style="margin-right: 16px"
+                  >
+                    <span slot="term">{{scope.row.range}}%</span>
+                  </trend>
+                </template>
+              </el-table-column>
+            </el-table>
+            <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="1"
+              :page-size="5"
+              background
+              layout=" prev, pager, next"
+              :total="50"
+              style="float: right; margin-top: 10px; margin-bottom: 10px"
+            ></el-pagination>
+          </div>
         </el-card>
       </el-col>
       <el-col :sm="24" :md="12" :xl="12">
@@ -135,7 +199,8 @@ import {
   MiniProgress,
   Trend,
   Bar,
-  RankList
+  RankList,
+  NumberInfo
 } from "@/components";
 
 const rankList1 = [];
@@ -143,6 +208,17 @@ for (let i = 0; i < 7; i++) {
   rankList1.push({
     name: "白鹭岛 " + (i + 1) + " 号店",
     total: 1234.56 - i * 100
+  });
+}
+
+const searchData = [];
+for (let i = 0; i < 5; i += 1) {
+  searchData.push({
+    index: i + 1,
+    keyword: `搜索关键词-${i}`,
+    count: Math.floor(Math.random() * 1000),
+    range: Math.floor(Math.random() * 100),
+    status: Math.floor((Math.random() * 10) % 2)
   });
 }
 
@@ -163,14 +239,26 @@ export default {
     MiniProgress,
     Trend,
     Bar,
-    RankList
+    RankList,
+    NumberInfo
   },
   data() {
     return {
       tabItem: "tab1",
       rankList1,
-      rankList2
+      rankList2,
+      searchData
     };
+  },
+  methods: {
+    // 列表条数改变
+    handleSizeChange() {
+      // 调用接口，获取列表
+    },
+    // 列表页码改变
+    handleCurrentChange() {
+      // 调用接口，获取列表
+    }
   }
 };
 </script>
@@ -198,10 +286,6 @@ export default {
     }
   }
 }
-
-// .el-tab-pane > .active {
-//   display: block !important;
-// }
 </style>
 
    

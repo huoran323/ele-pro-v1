@@ -16,7 +16,7 @@ export default {
   name: "Trend",
   props: {
     /**
-     * 上升下降标识：up|down
+     * 上升下降标识：top|bottom
      */
     flag: {
       type: String,

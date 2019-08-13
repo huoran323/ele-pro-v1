@@ -24,7 +24,9 @@ export default {
         },
         grid: {
           left: "0%",
-          right: "0%"
+          right: "0%",
+          top: "3%",
+          bottom: "5%"
         },
         tooltip: {
           trigger: "axis",
@@ -56,7 +58,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .antv-chart-mini {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 75px;
   bottom: -20px;

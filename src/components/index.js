@@ -7,6 +7,7 @@ import Bar from "@/components/Charts/Bar";
 import Trend from "@/components/Trend";
 import RankList from "@/components/Charts/RankList";
 import NumberInfo from "@/components/NumberInfo";
+import Pagination from "@/components/Pagination";
 
 export {
   ChartCard,
@@ -16,5 +17,6 @@ export {
   Trend,
   Bar,
   RankList,
-  NumberInfo
+  NumberInfo,
+  Pagination
 };
