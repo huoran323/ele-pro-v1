@@ -31,7 +31,22 @@
             </el-card>
           </el-card>
         </el-col>
-        <el-col :xl="8" :lg="24" :md="24" :sm="24" :xs="24"></el-col>
+        <el-col :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
+          <el-card>
+            <div slot="header">
+              <span>快速开始/便捷导航</span>
+            </div>
+            <div class="item-group">
+              <a>操作一</a>
+              <a>操作二</a>
+              <a>操作三</a>
+              <a>操作四</a>
+              <a>操作五</a>
+              <a>操作六</a>
+              <el-button type="primary" icon="el-icon-plus" plain>添加</el-button>
+            </div>
+          </el-card>
+        </el-col>
       </el-row>
     </div>
   </page-view>
@@ -118,6 +133,16 @@ export default {
       flex: 0 0 auto;
       float: right;
     }
+  }
+}
+.item-group {
+  font-size: 0;
+  a {
+    color: rgba(0, 0, 0, 0.65);
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 13px;
+    width: 25%;
   }
 }
 </style>
