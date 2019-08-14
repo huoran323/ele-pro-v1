@@ -1,6 +1,6 @@
 <template>
   <div class="page-header-index-wide">
-    <el-row :gutter="24">
+    <el-row :gutter="24" style="margin: 0">
       <el-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
         <chart-card title="总销售额" total="¥126,560">
           <el-tooltip content="指标说明" slot="action" placement="top">
@@ -70,7 +70,7 @@
       </el-col>
     </el-row>
 
-    <el-card>
+    <el-card style="margin: 0px 12px 0px">
       <div>
         <div class="extra-wrapper">
           <div class="extra-item">
@@ -112,7 +112,7 @@
       </div>
     </el-card>
 
-    <el-row :gutter="24">
+    <el-row :gutter="24" style="margin: 0px ">
       <el-col :sm="24" :md="12" :xl="12">
         <el-card :style="{ marginTop: '24px', minHeight: '500px', marginBottom: '24px' }">
           <div slot="header">

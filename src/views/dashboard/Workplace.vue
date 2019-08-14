@@ -1,9 +1,12 @@
 <template>
-  <div>空页面</div>
+  <page-view>gongzuotai</page-view>
 </template>
 <script>
-export default {};
+import { PageView } from "@/layouts";
+export default {
+  components: { PageView }
+};
 </script>
-<style>
+<style lang="less" scoped>
 </style>
 

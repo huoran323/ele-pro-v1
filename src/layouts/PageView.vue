@@ -8,10 +8,12 @@
     </page-header>
     <!-- 页面主体内容 -->
     <div class="content">
-      <keep-alive>
-        <!-- 通过设置ref属性，可以使用$refs获取对应子组件的信息 -->
-        <router-view ref="content" />
-      </keep-alive>
+      <slot>
+        <keep-alive>
+          <!-- 通过设置ref属性，可以使用$refs获取对应子组件的信息 -->
+          <router-view ref="content" />
+        </keep-alive>
+      </slot>
     </div>
   </div>
 </template>

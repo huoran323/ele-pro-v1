@@ -38,8 +38,8 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.content {
-  padding: 0px 24px 0;
-}
+// .content {
+//   padding: 0px 24px 0;
+// }
 </style>
 
