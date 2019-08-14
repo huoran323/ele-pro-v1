@@ -11,7 +11,8 @@ const user = {
     name: "",
     // 用户头像
     avatar: "",
-    roles: []
+    roles: [],
+    userInfo: {}
   },
   mutations: {
     // 存储token
@@ -26,6 +27,9 @@ const user = {
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar;
+    },
+    SET_INFO: (state, info) => {
+      state.userInfo = info;
     }
   },
   actions: {
@@ -56,6 +60,7 @@ const user = {
             commit("SET_ROLES", roles);
             commit("SET_NAME", result.name);
             commit("SET_AVATAR", result.avatar);
+            commit("SET_INFO", result);
             resolve(result);
           })
           .catch(error => {

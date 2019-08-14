@@ -2,6 +2,9 @@
   <div>
     <!-- 控制头部显示与隐藏 -->
     <page-header v-if="!$route.meta.hiddenHeaderContent" :title="pageTitle" class="page-header">
+      <!-- 自定义头部 -->
+      <!-- slot标签用来接收父组件的插槽，name为headerContent；内部的slot属性是向page-header插入插槽的位置，name为content -->
+      <slot slot="content" name="headerContent"></slot>
       <div slot="content">
         <p style="font-size: 14px;color: rgba(0,0,0,.65)">{{ description }}</p>
       </div>
@@ -28,6 +31,13 @@ export default {
       description: null
     };
   },
+  props: {
+    // 用来控制面包屑下面显示的左侧标签，如果传递false，则不显示
+    title: {
+      type: [String, Boolean],
+      default: true
+    }
+  },
   mounted() {
     this.getPageMeta();
   },
@@ -37,7 +47,10 @@ export default {
   methods: {
     getPageMeta() {
       // 获取页面的title值
-      this.pageTitle = this.$route.meta.title;
+      this.pageTitle =
+        typeof this.title === "string" || !this.title
+          ? this.title
+          : this.$route.meta.title;
 
       const content = this.$refs.content;
 

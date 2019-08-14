@@ -4,6 +4,7 @@
  * @param {boolean} immediate
  * @return {*}
  */
+// 防抖函数
 export function debounce(func, wait, immediate) {
   let timeout, args, context, timestamp, result;
 
