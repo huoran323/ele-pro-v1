@@ -30,6 +30,17 @@
               </div>
             </el-card>
           </el-card>
+
+          <el-card style="margin-top: 20px">
+            <div slot="header">
+              <span>动态</span>
+            </div>
+            <ul>
+              <li v-for="(item, index) in activities" :key="index">
+                <el-avatar :src="item.user.avatar" size="small"></el-avatar>
+              </li>
+            </ul>
+          </el-card>
         </el-col>
         <el-col :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
           <el-card>
@@ -61,7 +72,8 @@ export default {
     return {
       timeFix: timeFix(),
       user: {},
-      projects: []
+      projects: [],
+      activities: []
     };
   },
   computed: {
@@ -75,11 +87,17 @@ export default {
   },
   mounted() {
     this.getProjects();
+    this.getActivity();
   },
   methods: {
     getProjects() {
       this.$http.get("/list/search/projects").then(res => {
         this.projects = res.result && res.result.data;
+      });
+    },
+    getActivity() {
+      this.$http.get("/workplace/activity").then(res => {
+        this.activities = res.result;
       });
     }
   }
@@ -143,6 +161,15 @@ export default {
     font-size: 14px;
     margin-bottom: 13px;
     width: 25%;
+  }
+}
+
+ul {
+  list-style: none;
+
+  li {
+    line-height: 80px;
+    border-bottom: solid 1px #f5f5f5;
   }
 }
 </style>
