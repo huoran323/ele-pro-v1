@@ -10,6 +10,7 @@ import Trend from "@/components/Trend";
 import RankList from "@/components/Charts/RankList";
 import NumberInfo from "@/components/NumberInfo";
 import Pagination from "@/components/Pagination";
+import Loading from "@/components/Loading";
 
 export {
   ChartCard,
@@ -22,5 +23,6 @@ export {
   Radar,
   RankList,
   NumberInfo,
-  Pagination
+  Pagination,
+  Loading
 };

@@ -137,6 +137,8 @@ export default {
   },
   methods: {
     getProjects() {
+      this.$store.commit("SHOW_LOADING");
+      debugger;
       this.$http.get("/list/search/projects").then(res => {
         this.projects = res.result && res.result.data;
       });

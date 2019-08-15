@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 import user from "./modules/user";
 import permission from "./modules/permission";
+import loading from "./modules/loading";
 import getters from "./getters";
 
 Vue.use(Vuex);
@@ -10,7 +11,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     user,
-    permission
+    permission,
+    loading
   },
   state: {},
   mutations: {},

@@ -13,6 +13,7 @@
         <!-- <breadcrumb></breadcrumb> -->
         <div class="main">
           <router-view></router-view>
+          <!-- <loading v-if="loading"></loading> -->
         </div>
       </el-main>
       <!-- <el-footer></el-footer> -->
@@ -24,9 +25,10 @@ import Breadcrumb from "@/components/Tools/Breadcrumb";
 import SideMenu from "@/components/Menu/SideMenu";
 import GlobalHeader from "@/components/GlobalHeader/GlobalHeader";
 import MultiTab from "@/components/MultiTab";
+import { Loading } from "@/components";
 import { mapState } from "vuex";
 export default {
-  components: { SideMenu, GlobalHeader, MultiTab, Breadcrumb },
+  components: { SideMenu, GlobalHeader, MultiTab, Breadcrumb, Loading },
   data() {
     return {
       collapsed: false,
@@ -36,7 +38,8 @@ export default {
   computed: {
     ...mapState({
       // 动态主路由
-      mainMenu: state => state.permission.addRouters
+      mainMenu: state => state.permission.addRouters,
+      loading: state => state.loading.LOADING
     }),
     classObj() {
       return {
