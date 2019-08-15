@@ -22,6 +22,7 @@ export default {
       let myChart = this.$echarts.init(this.$el);
       myChart.setOption({
         tooltip: {},
+        // 雷达图线条颜色
         color: ["#1585ff", "#2aba51", "#f9c515"],
         legend: {
           data: ["个人", "团队", "部门"],

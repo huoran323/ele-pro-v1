@@ -84,6 +84,22 @@
             </div>
             <Radar />
           </el-card>
+
+          <el-card style="margin-top:20px;min-height: 273px;margin-bottom:20px">
+            <div slot="header">
+              <span>团队</span>
+            </div>
+            <div class="members">
+              <el-row>
+                <el-col :span="12" v-for="(item, index) in teams" :key="index">
+                  <a>
+                    <el-avatar :src="item.avatar" size="small"></el-avatar>
+                    <span class="member">{{item.name}}</span>
+                  </a>
+                </el-col>
+              </el-row>
+            </div>
+          </el-card>
         </el-col>
       </el-row>
     </div>
@@ -101,7 +117,8 @@ export default {
       timeFix: timeFix(),
       user: {},
       projects: [],
-      activities: []
+      activities: [],
+      teams: []
     };
   },
   computed: {
@@ -116,6 +133,7 @@ export default {
   mounted() {
     this.getProjects();
     this.getActivity();
+    this.getTeams();
   },
   methods: {
     getProjects() {
@@ -126,6 +144,11 @@ export default {
     getActivity() {
       this.$http.get("/workplace/activity").then(res => {
         this.activities = res.result;
+      });
+    },
+    getTeams() {
+      this.$http.get("/workplace/teams").then(res => {
+        this.teams = res.result;
       });
     }
   }
@@ -196,7 +219,7 @@ ul {
   list-style: none;
 
   li {
-    line-height: 80px;
+    line-height: 60px;
     border-bottom: solid 1px #f5f5f5;
   }
 }
@@ -210,6 +233,30 @@ ul {
 
     a {
       color: #1890ff;
+    }
+  }
+}
+
+.members {
+  a {
+    display: block;
+    margin: 12px 0;
+    line-height: 24px;
+    height: 24px;
+    .member {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.65);
+      line-height: 24px;
+      max-width: 100px;
+      vertical-align: top;
+      margin-left: 12px;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    &:hover {
+      span {
+        color: #1890ff;
+      }
     }
   }
 }
