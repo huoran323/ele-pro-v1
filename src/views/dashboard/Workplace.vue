@@ -31,13 +31,33 @@
             </el-card>
           </el-card>
 
-          <el-card style="margin-top: 20px">
+          <el-card style="margin-top: 20px;margin-bottom: 20px">
             <div slot="header">
               <span>动态</span>
             </div>
             <ul>
               <li v-for="(item, index) in activities" :key="index">
-                <el-avatar :src="item.user.avatar" size="small"></el-avatar>
+                <div class="activity">
+                  <el-avatar :src="item.user.avatar" size="small" style="align-item: center"></el-avatar>
+                  <div class="activity-content">
+                    <div
+                      style="margin-left:20px;position:relative;line-height:22px;margin-top:20px"
+                    >
+                      {{ item.user.nickname }}
+                      &nbsp;
+                      在&nbsp;
+                      <a
+                        href="#"
+                      >{{ item.project.name }}</a>
+                      &nbsp;
+                      {{ item.project.action }}&nbsp;
+                      <a
+                        href="#"
+                      >{{ item.project.event }}</a>
+                    </div>
+                    <div style="margin-left:20px;line-height:22px">{{ item.time }}</div>
+                  </div>
+                </div>
               </li>
             </ul>
           </el-card>
@@ -170,6 +190,19 @@ ul {
   li {
     line-height: 80px;
     border-bottom: solid 1px #f5f5f5;
+  }
+}
+
+.activity {
+  margin-left: 20px;
+
+  .activity-content {
+    display: inline-block;
+    position: relative;
+
+    a {
+      color: #1890ff;
+    }
   }
 }
 </style>
