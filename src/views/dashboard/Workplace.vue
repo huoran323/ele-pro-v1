@@ -31,7 +31,7 @@
             </el-card>
           </el-card>
 
-          <el-card style="margin-top: 20px;margin-bottom: 20px">
+          <el-card style="margin-top: 20px;margin-bottom: 20px; min-height:600px">
             <div slot="header">
               <span>动态</span>
             </div>
@@ -77,6 +77,13 @@
               <el-button type="primary" icon="el-icon-plus" plain>添加</el-button>
             </div>
           </el-card>
+
+          <el-card style="margin-top:20px">
+            <div slot="header">
+              <span>XX指数</span>
+            </div>
+            <Radar />
+          </el-card>
         </el-col>
       </el-row>
     </div>
@@ -86,8 +93,9 @@
 import { PageView } from "@/layouts";
 import { timeFix } from "@/utils/util";
 import { mapGetters } from "vuex";
+import { Radar } from "@/components";
 export default {
-  components: { PageView },
+  components: { PageView, Radar },
   data() {
     return {
       timeFix: timeFix(),
