@@ -12,7 +12,7 @@ import { VueAxios } from "./utils/request";
 import "@/styles/index.less";
 
 // mock
-import "./mock";
+// import "./mock";
 
 import "./core/use"; // 引入配置
 import "./permission"; // permission control

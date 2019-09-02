@@ -1,7 +1,7 @@
 import Vue from "vue";
 import axios from "axios";
 import store from "@/store";
-import qs from "qs";
+import Qs from "qs";
 import { VueAxios } from "./axios";
 import { ACCESS_TOKEN } from "@/store/mutation-types";
 import { Notification } from "element-ui";
@@ -53,6 +53,7 @@ service.interceptors.request.use(config => {
   if (token) {
     config.headers["Access-Token"] = token; // 让每个请求携带自定义 token 请根据实际情况自行修改
   }
+  config.data = Qs.stringify(config.data);
   // config.data = qs.stringify(config.data, {
   //   arrayFormat: "indices",
   //   allowDots: true
@@ -63,7 +64,18 @@ service.interceptors.request.use(config => {
 
 // response interceptor
 service.interceptors.response.use(response => {
-  return response.data;
+  switch (response.data.code) {
+    // 请求成功
+    case "200":
+      Notification.success({
+        title: "",
+        message: response.data.message
+      });
+      return response.data;
+
+    default:
+      return response.data;
+  }
 }, err);
 
 const installer = {

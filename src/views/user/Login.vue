@@ -112,13 +112,17 @@ export default {
         });
         if (!empty) {
           Login(parameter)
-            .then(res => this.loginSuccess(res))
+            .then(res => {
+              debugger;
+              this.loginSuccess(res);
+            })
             .catch(err => this.requestFailed(err));
         }
       });
     },
     loginSuccess(res) {
       console.log(res);
+      debugger;
       this.$router.push({ name: "dashboard" });
       // 延迟一秒显示欢迎信息
       setTimeout(() => {

@@ -36,11 +36,14 @@ const user = {
     Login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo)
-          .then(response => {
-            const result = response.result;
+          .then(res => {
+            // const result = res.result;
 
-            Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000);
-            commit("SET_TOKEN", result.token);
+            // Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000);
+            // commit("SET_TOKEN", result.token);
+            Vue.ls.set(ACCESS_TOKEN, res.token, 7 * 24 * 60 * 60 * 1000);
+            commit("SET_TOKEN", res.token);
+
             resolve();
           })
           .catch(error => {
