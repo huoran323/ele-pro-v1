@@ -84,24 +84,24 @@ const permission = {
     }
   },
   actions: {
-    // // 异步获取从后台返回的route数据
-    // GenerateRoutes({ commit }, roles) {
-    //   return new Promise((resolve, reject) => {
-    //     getRouteList()
-    //       .then(response => {
-    //         let accessedRoutes;
-    //         const { result } = response;
-    //         splitRoutes(result);
-    //         accessedRoutes = filterAsyncRouteList(asyncRouterMap);
-    //         commit("SET_ROUTERS", accessedRoutes);
+    // 异步获取从后台返回的route数据
+    GenerateRoutesByEnd({ commit }, roles) {
+      return new Promise((resolve, reject) => {
+        getRouteList()
+          .then(response => {
+            let accessedRoutes;
+            const { result } = response;
+            splitRoutes(result);
+            accessedRoutes = filterAsyncRouteList(asyncRouterMap);
+            commit("SET_ROUTERS", accessedRoutes);
 
-    //         resolve(accessedRoutes);
-    //       })
-    //       .catch(error => {
-    //         reject(error);
-    //       });
-    //   });
-    // }
+            resolve(accessedRoutes);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
 
     // 获取本地的route
     GenerateRoutes({ commit }, roles) {
