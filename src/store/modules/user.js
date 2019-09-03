@@ -41,6 +41,7 @@ const user = {
 
             // Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000);
             // commit("SET_TOKEN", result.token);
+
             Vue.ls.set(ACCESS_TOKEN, res.token, 7 * 24 * 60 * 60 * 1000);
             commit("SET_TOKEN", res.token);
 
@@ -57,14 +58,14 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo()
           .then(response => {
-            const { result } = response;
-            const { roles } = result;
+            const { data } = response;
+            const { roles } = data;
 
             commit("SET_ROLES", roles);
-            commit("SET_NAME", result.name);
-            commit("SET_AVATAR", result.avatar);
-            commit("SET_INFO", result);
-            resolve(result);
+            commit("SET_NAME", data.name);
+            commit("SET_AVATAR", data.avatar);
+            commit("SET_INFO", data);
+            resolve(data);
           })
           .catch(error => {
             reject(error);

@@ -15,7 +15,7 @@
           </el-form-item>
           <el-form-item prop="password" :rules="[
           {required: true, message: '请输入密码'}]">
-            <el-input placeholder="密码：admin" v-model="validateForm.password">
+            <el-input placeholder="密码：admin" v-model="validateForm.password" type="password">
               <i slot="prefix" class="el-icon-lock"></i>
             </el-input>
           </el-form-item>
@@ -112,17 +112,13 @@ export default {
         });
         if (!empty) {
           Login(parameter)
-            .then(res => {
-              debugger;
-              this.loginSuccess(res);
-            })
+            .then(res => this.loginSuccess(res))
             .catch(err => this.requestFailed(err));
         }
       });
     },
     loginSuccess(res) {
       console.log(res);
-      debugger;
       this.$router.push({ name: "dashboard" });
       // 延迟一秒显示欢迎信息
       setTimeout(() => {
@@ -134,7 +130,6 @@ export default {
       }, 1000);
     },
     requestFailed(err) {
-      console.log(err);
       this.$notify.error({
         title: "错误",
         message:

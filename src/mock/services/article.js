@@ -83,7 +83,7 @@ const article = options => {
       cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)]
     });
   }
-  debugger;
+
   return builder(data, "请求成功", 200);
 };
 

@@ -138,19 +138,19 @@ export default {
   methods: {
     getProjects() {
       this.$store.commit("SHOW_LOADING");
-      debugger;
+
       this.$http.get("/list/search/projects").then(res => {
-        this.projects = res.result && res.result.data;
+        this.projects = res.data && res.data.data;
       });
     },
     getActivity() {
       this.$http.get("/workplace/activity").then(res => {
-        this.activities = res.result;
+        this.activities = res.data;
       });
     },
     getTeams() {
       this.$http.get("/workplace/teams").then(res => {
-        this.teams = res.result;
+        this.teams = res.data;
       });
     }
   }
