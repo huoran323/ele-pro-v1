@@ -16,10 +16,10 @@ export default {
     } = this;
     const inKeep = (
       // <!-- 失活的组件将会被缓存！-->
-      <div class="content">
-        <keep-alive>
+      <div>
+        <div class="content">
           <router-view />
-        </keep-alive>
+        </div>
       </div>
     );
     const notKeep = (

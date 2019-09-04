@@ -8,6 +8,16 @@ export const asyncRouterMap = [
     meta: { title: "首页", roles: ["admin", "editor"] },
     redirect: "/dashboard/analysis",
     children: [
+      // driver
+      {
+        path: "/driver",
+        name: "Driver",
+        component: () => import("@/views/driver"),
+        meta: {
+          title: "引导指南",
+          icon: "el-icon-s-flag"
+        }
+      },
       //dashboard
       {
         path: "/dashboard",

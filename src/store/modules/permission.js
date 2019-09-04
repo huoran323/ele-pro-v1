@@ -71,6 +71,7 @@ const permission = {
             let accessedRoutes = [];
             const { data } = response;
             accessedRoutes = forSearchArr(asyncRouterMap, data);
+
             commit("SET_ROUTERS", accessedRoutes);
             resolve(accessedRoutes);
 
