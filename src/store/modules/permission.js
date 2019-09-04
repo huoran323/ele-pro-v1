@@ -36,7 +36,7 @@ export function filterAsyncRoutes(routes, roles) {
   return res;
 }
 
-// 遍历asyncRoutes动态路由
+// 遍历asyncRoutes动态路由，筛选符合后台返回权限的路由
 function forSearchArr(route, roles) {
   let arrNew = [];
   for (let item of route) {

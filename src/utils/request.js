@@ -9,7 +9,8 @@ import { Notification } from "element-ui";
 // 创建 axios 实例
 
 const service = axios.create({
-  baseURL: "/api",
+  // baseURL: "/api",
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 6000, //请求超时时间
   responseType: "json",
   headers: {
