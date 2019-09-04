@@ -11,7 +11,7 @@ export const asyncRouterMap = [
       //dashboard
       {
         path: "/dashboard",
-        name: "dashboard",
+        name: "Dashboard",
         redirect: "/dashboard/analysis",
         component: RouteView,
         meta: {
@@ -42,7 +42,7 @@ export const asyncRouterMap = [
       // form
       {
         path: "/form",
-        name: "form",
+        name: "Form",
         redirect: "/form/base-form",
         component: PageView,
         meta: {
@@ -65,7 +65,7 @@ export const asyncRouterMap = [
       // list
       {
         path: "/list",
-        name: "list",
+        name: "List",
         component: PageView,
         redirect: "/list/table-list",
         meta: { title: "列表页", icon: "el-icon-tickets" },
@@ -81,7 +81,7 @@ export const asyncRouterMap = [
       },
       {
         path: "/exception",
-        name: "exception",
+        name: "Exception",
         component: RouteView,
         redirect: "/exception/404",
         meta: { title: "异常页", icon: "el-icon-lollipop" },
@@ -97,6 +97,19 @@ export const asyncRouterMap = [
       }
     ]
   },
+  // {
+  //   path: "/user",
+  //   component: UserLayout,
+  //   redirect: "/user/login",
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: "login",
+  //       name: "login",
+  //       component: () => import("@/views/user/Login")
+  //     }
+  //   ]
+  // },
   {
     path: "*",
     redirect: "/404"

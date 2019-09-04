@@ -15,10 +15,11 @@ export const getInfo = () => {
   });
 };
 
-export const getRouteList = () => {
+export const getRouteList = parameter => {
   return axios({
     url: "/user/routelist",
-    method: "get"
+    method: "post",
+    data: parameter
   });
 };
 

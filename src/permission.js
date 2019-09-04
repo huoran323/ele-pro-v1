@@ -26,17 +26,23 @@ router.beforeEach(async (to, from, next) => {
       next({ path: "/dashboard/analysis" });
       NProgress.done();
     } else {
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0;
+      const hasRoleId = store.getters.roleId && store.getters.roleId.length > 0;
 
-      if (hasRoles) {
+      if (hasRoleId) {
         next();
       } else {
         try {
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-          const { roles } = await store.dispatch("GetInfo");
+          const { roleId } = await store.dispatch("GetInfo");
 
           // generate accessible routes map based on roles
-          const accessRoutes = await store.dispatch("GenerateRoutes", roles);
+          // 模拟后台返回路由权限数据
+          const accessRoutes = await store.dispatch(
+            "GenerateRoutesByEnd",
+            roleId
+          );
+          // 模拟本地获取路由权限数据
+          // const accessRoutes = await store.dispatch("GenerateRoutes", roleId);
 
           // dynamically add accessible routes
           router.addRoutes(accessRoutes);

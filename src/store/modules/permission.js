@@ -1,5 +1,3 @@
-import Vue from "vue";
-
 import { getRouteList } from "@/api/login";
 import { constantRouterMap, asyncRouterMap } from "@/config/router.config";
 
@@ -38,38 +36,19 @@ export function filterAsyncRoutes(routes, roles) {
   return res;
 }
 
-// 筛选本地route中含有后台返回的route权限
-export function hasRoute(requestList, filterRoute) {
-  return requestList.some(item => item.path == filterRoute.path);
-}
-
-//把子数组拆分到同一级中
-const routeLists = [];
-export function splitRoutes(routes) {
-  routes.map(list => {
-    if (list.children) {
-      splitRoutes(list.children);
-    }
-    // routeLists.unshift({ path: list.path });
-    routeLists.unshift({ ...list });
-  });
-
-  return routeLists;
-}
-
-// 将本地中含有后台返回的route放进新的route数组
-export function filterAsyncRouteList(children) {
-  const res = [];
-
-  children.forEach(route => {
-    if (hasRoute(routeLists, route)) {
-      if (route.children) {
-        route.children = filterAsyncRouteList(route.children);
+// 遍历asyncRoutes动态路由
+function forSearchArr(route, roles) {
+  let arrNew = [];
+  for (let item of route) {
+    let itemNew = { ...item }; //解决浅拷贝共享同一内存地址
+    if (roles.includes(itemNew.name)) {
+      if (itemNew.children) {
+        itemNew.children = forSearchArr(itemNew.children, roles);
       }
-      res.push(route);
+      arrNew.push(itemNew);
     }
-  });
-  return res;
+  }
+  return arrNew;
 }
 
 const permission = {
@@ -85,17 +64,18 @@ const permission = {
   },
   actions: {
     // 异步获取从后台返回的route数据
-    GenerateRoutesByEnd({ commit }, roles) {
+    GenerateRoutesByEnd({ commit }, roleId) {
       return new Promise((resolve, reject) => {
-        getRouteList()
+        getRouteList({ roleId: roleId })
           .then(response => {
-            let accessedRoutes;
-            const { result } = response;
-            splitRoutes(result);
-            accessedRoutes = filterAsyncRouteList(asyncRouterMap);
+            let accessedRoutes = [];
+            const { data } = response;
+            accessedRoutes = forSearchArr(asyncRouterMap, data);
             commit("SET_ROUTERS", accessedRoutes);
-
             resolve(accessedRoutes);
+
+            // commit("SET_ROUTERS", data);
+            // resolve(data);
           })
           .catch(error => {
             reject(error);
@@ -104,13 +84,13 @@ const permission = {
     },
 
     // 获取本地的route
-    GenerateRoutes({ commit }, roles) {
+    GenerateRoutes({ commit }, roleId) {
       return new Promise(resolve => {
         let accessedRoutes;
-        if (roles.includes("admin")) {
+        if (roleId === "admin") {
           accessedRoutes = asyncRouterMap || [];
         } else {
-          accessedRoutes = filterAsyncRoutes(asyncRouterMap, roles);
+          accessedRoutes = filterAsyncRoutes(asyncRouterMap, roleId);
         }
         commit("SET_ROUTERS", accessedRoutes);
         resolve(accessedRoutes);

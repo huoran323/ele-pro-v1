@@ -11,7 +11,7 @@ const user = {
     name: "",
     // 用户头像
     avatar: "",
-    roles: [],
+    roleId: "",
     userInfo: {}
   },
   mutations: {
@@ -19,8 +19,8 @@ const user = {
     SET_TOKEN: (state, token) => {
       state.token = token;
     },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles;
+    SET_ROLEID: (state, roleId) => {
+      state.roleId = roleId;
     },
     SET_NAME: (state, name) => {
       state.name = name;
@@ -59,9 +59,9 @@ const user = {
         getInfo()
           .then(response => {
             const { data } = response;
-            const { roles } = data;
+            const { roleId } = data;
 
-            commit("SET_ROLES", roles);
+            commit("SET_ROLEID", roleId);
             commit("SET_NAME", data.name);
             commit("SET_AVATAR", data.avatar);
             commit("SET_INFO", data);
@@ -77,7 +77,7 @@ const user = {
     Logout({ commit, state }) {
       return new Promise(resolve => {
         commit("SET_TOKEN", "");
-        commit("SET_ROLES", []);
+        commit("SET_ROLEID", "");
         Vue.ls.remove(ACCESS_TOKEN);
 
         logout(state.token)
@@ -94,7 +94,7 @@ const user = {
     resetToken({ commit }) {
       return new Promise(resolve => {
         commit("SET_TOKEN", "");
-        commit("SET_ROLES", []);
+        commit("SET_ROLEID", "");
         Vue.ls.remove(ACCESS_TOKEN);
         resolve();
       });
