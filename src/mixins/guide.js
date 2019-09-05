@@ -1,6 +1,6 @@
 const steps = [
   {
-    element: "#domSideBar",
+    element: "#domSideBar", // 通过给标签设置id，找到标签
     popover: {
       title: "菜单导航",
       description: "点击菜单可切换右侧菜单内容",

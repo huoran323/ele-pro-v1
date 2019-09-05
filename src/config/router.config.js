@@ -85,7 +85,7 @@ export const asyncRouterMap = [
             name: "TableListWrapper",
             hideChildrenInMenu: true,
             component: () => import("@/views/list/TableList"),
-            meta: { title: "查询表格", keepAlive: true }
+            meta: { title: "普通表格", keepAlive: true }
           }
         ]
       },

@@ -2,8 +2,8 @@ import Vue from "vue";
 import router from "./router"; //引入创建的路由对象
 import store from "./store";
 import { Message } from "element-ui";
-import NProgress from "nprogress"; // 引入加载进度条
-import "nprogress/nprogress.css"; // progress bar style
+// import NProgress from "nprogress"; // 引入加载进度条
+// import "nprogress/nprogress.css"; // progress bar style
 import { ACCESS_TOKEN } from "@/store/mutation-types";
 
 const whiteList = ["login"]; // no redirect whitelist
@@ -13,7 +13,7 @@ const whiteList = ["login"]; // no redirect whitelist
 // from: Route: 当前导航正要离开的路由;
 // next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
 router.beforeEach(async (to, from, next) => {
-  NProgress.start(); //进度条开始
+  // NProgress.start(); //进度条开始
 
   //判断token
   if (Vue.ls.get(ACCESS_TOKEN)) {
@@ -24,7 +24,7 @@ router.beforeEach(async (to, from, next) => {
       // const meta = store.getters.addRoutes[0];
       // next({ path: meta.path });
       next({ path: "/dashboard/analysis" });
-      NProgress.done();
+      // NProgress.done();
     } else {
       const hasRoleId = store.getters.roleId && store.getters.roleId.length > 0;
 
@@ -55,7 +55,7 @@ router.beforeEach(async (to, from, next) => {
           await store.dispatch("user/resetToken");
           Message.error(error || "Has Error");
           next({ path: "/user/login" });
-          NProgress.done();
+          // NProgress.done();
         }
       }
     }
@@ -65,11 +65,11 @@ router.beforeEach(async (to, from, next) => {
       next();
     } else {
       next({ path: "/user/login" });
-      NProgress.done(); // if current page is login will not trigger afterEach hook, so manually handle it
+      // NProgress.done(); // if current page is login will not trigger afterEach hook, so manually handle it
     }
   }
 });
 
 router.afterEach(() => {
-  NProgress.done(); // finish progress bar
+  // NProgress.done(); // finish progress bar
 });
