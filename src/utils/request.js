@@ -11,7 +11,7 @@ import { Notification } from "element-ui";
 const service = axios.create({
   // baseURL: "/api",
   baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 6000, //请求超时时间
+  timeout: 10000, //请求超时时间
   responseType: "json",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
@@ -68,15 +68,16 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(response => {
   switch (response.data.code) {
     // 请求成功
-    case "200":
+    case 200:
       Notification.success({
         title: "",
         message: response.data.message
       });
+
       return response.data;
 
     default:
-      return response.data;
+      return "";
   }
 }, err);
 

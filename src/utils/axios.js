@@ -1,3 +1,5 @@
+import Qs from "qs";
+
 const VueAxios = {
   vm: {},
   // eslint-disable-next-line no-unused-vars
@@ -26,6 +28,10 @@ const VueAxios = {
         get: function get() {
           return instance;
         }
+        // post: function post(parameter) {
+        //   instance.data = Qs.stringify(parameter);
+        //   return instance;
+        // }
       }
     });
   }
