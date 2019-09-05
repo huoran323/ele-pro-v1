@@ -39,7 +39,7 @@
 git clone git@https://github.com/huoran323/ele-pro-v1.git
 
 # 进入项目目录
-cd vue-admin-webapp
+cd ele-pro-v1
 
 # 安装依赖
 npm install
