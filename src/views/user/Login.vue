@@ -6,22 +6,23 @@
         style="textAlign:center;borderBottom:unset"
         @tab-click="handleClick"
       >
-        <el-tab-pane label="账号密码登录" name="account">
-          <el-form-item prop="username" :rules="[
-          {required: true, message: '请输入账号'}]">
-            <el-input placeholder="账号：admin | user" v-model="validateForm.username">
-              <i slot="prefix" class="el-icon-user"></i>
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="password" :rules="[
-          {required: true, message: '请输入密码'}]">
-            <el-input placeholder="密码：123456" v-model="validateForm.password" type="password">
-              <i slot="prefix" class="el-icon-lock"></i>
-            </el-input>
-          </el-form-item>
-        </el-tab-pane>
+        <!-- <el-tab-pane label="账号密码登录" name="account"> -->
 
-        <el-tab-pane label="手机号登录" name="mobile">
+        <el-form-item prop="username" :rules="[
+          {required: true, message: '请输入账号'}]">
+          <el-input placeholder="账号：admin | user" v-model="validateForm.username">
+            <i slot="prefix" class="el-icon-user"></i>
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password" :rules="[
+          {required: true, message: '请输入密码'}]">
+          <el-input placeholder="密码：123456" v-model="validateForm.password" type="password">
+            <i slot="prefix" class="el-icon-lock"></i>
+          </el-input>
+        </el-form-item>
+        <!-- </el-tab-pane> -->
+
+        <!-- <el-tab-pane label="手机号登录" name="mobile">
           <el-form-item prop="phone" :rules="[{required: true, message: '请输入手机号'}]">
             <el-input placeholder="手机号" v-model="validateForm.phone">
               <i slot="prefix" class="el-icon-mobile-phone"></i>
@@ -40,7 +41,7 @@
               <el-button>获取验证码</el-button>
             </el-col>
           </el-row>
-        </el-tab-pane>
+        </el-tab-pane>-->
       </el-tabs>
 
       <el-form-item>
