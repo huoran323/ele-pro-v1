@@ -3,7 +3,7 @@
     <div class="content-box">
       <notice-icon class="action"></notice-icon>
       <el-dropdown>
-        <span class="action" id="domPersonal">
+        <span class="action" id="domPersonal" style="height: 60px">
           <!-- 头像 -->
           <el-avatar :src="avatar()" class="avatar" size="small"></el-avatar>
           <span>{{nickname()}}</span>
@@ -12,7 +12,7 @@
           <el-dropdown-item>
             <router-link :to="{name: 'center'}">
               <span>
-                <i class="el-icon-user"></i>
+                <i class="el-icon-user"></i>&nbsp;
                 <span>个人中心</span>
               </span>
             </router-link>
@@ -20,18 +20,19 @@
           <el-dropdown-item>
             <router-link :to="{name: 'center'}">
               <span>
-                <i class="el-icon-setting"></i>
+                <i class="el-icon-setting"></i>&nbsp;
                 <span>账户设置</span>
               </span>
             </router-link>
           </el-dropdown-item>
           <el-dropdown-item divided>
-            <a href="javascript:;" @click="handleLogout">
+            <!-- <a href="javascript:;" @click="handleLogout">
               <span>
                 <i class="el-icon-switch-button"></i>
                 <span>退出登录</span>
               </span>
-            </a>
+            </a>-->
+            <el-button icon="el-icon-switch-button" @click="handleLogout" type="text">退出登录</el-button>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
