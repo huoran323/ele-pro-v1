@@ -69,10 +69,10 @@ service.interceptors.response.use(response => {
   switch (response.data.code) {
     // 请求成功
     case 200:
-      Notification.success({
-        title: "",
-        message: response.data.message
-      });
+      // Notification.success({
+      //   title: "",
+      //   message: response.data.message
+      // });
 
       return response.data;
 
