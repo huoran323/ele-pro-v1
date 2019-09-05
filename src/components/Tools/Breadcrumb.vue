@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb class="breadcrumb">
+  <el-breadcrumb class="breadcrumb" id="domBread">
     <el-breadcrumb-item v-for="(item, index) in breadList" :key="item.name">
       <router-link
         v-if="item.name != name && index != 1 "

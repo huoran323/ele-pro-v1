@@ -5,6 +5,7 @@
         :class="collapsed ?  'el-icon-s-unfold' : 'el-icon-s-fold'"
         @click="toggle"
         class="trigger"
+        id="domColapse"
       />
       <user-menu></user-menu>
     </div>

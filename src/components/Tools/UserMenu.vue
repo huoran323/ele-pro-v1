@@ -3,7 +3,7 @@
     <div class="content-box">
       <notice-icon class="action"></notice-icon>
       <el-dropdown>
-        <span class="action">
+        <span class="action" id="domPersonal">
           <!-- 头像 -->
           <el-avatar :src="avatar()" class="avatar" size="small"></el-avatar>
           <span>{{nickname()}}</span>

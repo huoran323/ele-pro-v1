@@ -1,7 +1,7 @@
 <template>
   <div>
     <Logo :collapsed="collapsed" />
-    <side-menu-item :menu="menus" :collapsed="collapsed"></side-menu-item>
+    <side-menu-item :menu="menus" :collapsed="collapsed" id="domSideBar"></side-menu-item>
   </div>
 </template>
 <script>

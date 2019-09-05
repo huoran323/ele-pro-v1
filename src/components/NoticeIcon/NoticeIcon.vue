@@ -6,7 +6,7 @@
     trigger="click"
     content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
   >
-    <span class="header-notice" slot="reference">
+    <span class="header-notice" slot="reference" id="domMessage">
       <el-badge value="12">
         <i style="font-size: 16px; padding: 4px" class="el-icon-bell"></i>
       </el-badge>
