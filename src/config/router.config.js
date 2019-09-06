@@ -91,7 +91,7 @@ export const asyncRouterMap = [
             path: "/list/table-complex",
             name: "TableListComplex",
             component: () => import("@/views/list/TableComplex"),
-            meta: { title: "复杂表格", keepAlive: true }
+            meta: { title: "复杂表格", keepAlive: false }
           }
         ]
       },

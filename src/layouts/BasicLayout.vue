@@ -8,8 +8,8 @@
       <el-header class="container-header">
         <global-header :collapsed="collapsed" @toggle="toggle" />
       </el-header>
+      <multi-tab class="multi-tab"></multi-tab>
       <el-main>
-        <multi-tab></multi-tab>
         <!-- <breadcrumb></breadcrumb> -->
         <div class="main">
           <router-view></router-view>
@@ -119,6 +119,10 @@ export default {
     height: calc(100%-56px);
     // height: 100%;
     width: 100%;
+  }
+
+  .multi-tab {
+    // border-bottom: solid 1px #ccc;
   }
 }
 </style>
