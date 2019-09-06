@@ -86,6 +86,12 @@ export const asyncRouterMap = [
             hideChildrenInMenu: true,
             component: () => import("@/views/list/TableList"),
             meta: { title: "普通表格", keepAlive: true }
+          },
+          {
+            path: "/list/table-complex",
+            name: "TableListComplex",
+            component: () => import("@/views/list/TableComplex"),
+            meta: { title: "复杂表格", keepAlive: true }
           }
         ]
       },

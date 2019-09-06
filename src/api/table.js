@@ -14,3 +14,10 @@ export const getPageList = parameter => {
     data: parameter
   });
 };
+
+export const getComplexList = () => {
+  return axios({
+    url: "/table/getComplexList",
+    method: "get"
+  });
+};
