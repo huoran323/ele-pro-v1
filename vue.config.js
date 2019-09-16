@@ -28,12 +28,12 @@ module.exports = {
     // proxy: {
     //   "/api": {
     //     target:
-    //       "https://www.easy-mock.com/mock/5d6c6a1f18025466362a5cd7/currency/", //easymock项目地址
-    //     // target: "http://192.168.1.130:8080/",
+    //
+    //     target: "http://192.168.1.106:8080/",
     //     ws: true,
     //     changeOrigin: true, //是否跨域
     //     pathRewrite: {
-    //       "/api": ""
+    //       "/api": "/api"
     //     }
     //   }
     // },
@@ -46,6 +46,7 @@ module.exports = {
     //   warning: false,
     //   error: true
     // },
+
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
         target: process.env.VUE_APP_BASE_API,

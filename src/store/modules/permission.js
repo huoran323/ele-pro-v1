@@ -64,14 +64,14 @@ const permission = {
   },
   actions: {
     // 异步获取从后台返回的route数据
-    GenerateRoutesByEnd({ commit }, roleId) {
+    GenerateRoutesByEnd({ commit }, user_type) {
       return new Promise((resolve, reject) => {
-        getRouteList({ roleId: roleId })
+        getRouteList({ user_type: user_type })
           .then(response => {
             let accessedRoutes = [];
             const { data } = response;
-            accessedRoutes = forSearchArr(asyncRouterMap, data);
 
+            accessedRoutes = forSearchArr(asyncRouterMap, data);
             commit("SET_ROUTERS", accessedRoutes);
             resolve(accessedRoutes);
 

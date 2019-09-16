@@ -11,7 +11,7 @@ const user = {
     name: "",
     // 用户头像
     avatar: "",
-    roleId: "",
+    user_type: "",
     userInfo: {}
   },
   mutations: {
@@ -19,8 +19,8 @@ const user = {
     SET_TOKEN: (state, token) => {
       state.token = token;
     },
-    SET_ROLEID: (state, roleId) => {
-      state.roleId = roleId;
+    SET_USERTYPE: (state, user_type) => {
+      state.user_type = user_type;
     },
     SET_NAME: (state, name) => {
       state.name = name;
@@ -33,7 +33,7 @@ const user = {
     }
   },
   actions: {
-    Login({ commit }, userInfo) {
+    Login({ commit, dispatch }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo)
           .then(res => {
@@ -44,7 +44,6 @@ const user = {
 
             Vue.ls.set(ACCESS_TOKEN, res.token, 7 * 24 * 60 * 60 * 1000);
             commit("SET_TOKEN", res.token);
-
             resolve();
           })
           .catch(error => {
@@ -54,14 +53,16 @@ const user = {
     },
 
     // 获取用户信息
-    GetInfo({ commit }) {
+    GetInfo({ commit }, user_type) {
       return new Promise((resolve, reject) => {
-        getInfo()
-          .then(response => {
-            const { data } = response;
-            const { roleId } = data;
 
-            commit("SET_ROLEID", roleId);
+        getInfo({user_type: user_type})
+          .then(response => {
+
+            const { data } = response;
+            const { user_type } = data;
+
+            commit("SET_USERTYPE", user_type);
             commit("SET_NAME", data.name);
             commit("SET_AVATAR", data.avatar);
             commit("SET_INFO", data);
@@ -77,7 +78,7 @@ const user = {
     Logout({ commit, state }) {
       return new Promise(resolve => {
         commit("SET_TOKEN", "");
-        commit("SET_ROLEID", "");
+        commit("SET_USERTYPE", "");
         Vue.ls.remove(ACCESS_TOKEN);
 
         logout(state.token)
@@ -94,8 +95,8 @@ const user = {
     resetToken({ commit }) {
       return new Promise(resolve => {
         commit("SET_TOKEN", "");
-        commit("SET_ROLEID", "");
-        Vue.ls.remove(ACCESS_TOKEN);
+        commit("SET_USERTYPE", "");
+        Vue.ls.remove(USER_TYPE);
         resolve();
       });
     }

@@ -25,6 +25,7 @@ const err = error => {
   if (loading) {
     loading.close();
   }
+
   if (error.response) {
     const data = error.response.data;
     const token = Vue.ls.get(ACCESS_TOKEN);
@@ -60,7 +61,9 @@ service.interceptors.request.use(config => {
   const token = Vue.ls.get(ACCESS_TOKEN);
 
   if (token) {
-    config.headers["token"] = token; // 让每个请求携带自定义 token 请根据实际情况自行修改
+    // config.headers["token"] = token; // 让每个请求携带自定义 token 请根据实际情况自行修改
+    
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
   config.data = Qs.stringify(config.data);
   // config.data = qs.stringify(config.data, {
@@ -77,6 +80,7 @@ service.interceptors.response.use(response => {
   if (loading) {
     loading.close();
   }
+
   switch (response.data.code) {
     // 请求成功
     case 200:

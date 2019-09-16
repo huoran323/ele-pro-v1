@@ -2,22 +2,23 @@ import { axios } from "@/utils/request";
 
 export const login = parameter => {
   return axios({
-    url: "/auth/login",
+    url: "/user/login",
     method: "post",
     data: parameter
   });
 };
 
-export const getInfo = () => {
+export const getInfo = parameter => {
   return axios({
-    url: "/user/info",
-    method: "get"
+    url: "/user/getUserInfo",
+    method: "post",
+    data: parameter
   });
 };
 
 export const getRouteList = parameter => {
   return axios({
-    url: "/user/routelist",
+    url: "/user/getRouteList",
     method: "post",
     data: parameter
   });

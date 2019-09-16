@@ -4,7 +4,7 @@ import store from "./store";
 import { Message } from "element-ui";
 // import NProgress from "nprogress"; // 引入加载进度条
 // import "nprogress/nprogress.css"; // progress bar style
-import { ACCESS_TOKEN } from "@/store/mutation-types";
+import { ACCESS_TOKEN, USER_TYPE } from "@/store/mutation-types";
 
 const whiteList = ["login"]; // no redirect whitelist
 
@@ -26,20 +26,22 @@ router.beforeEach(async (to, from, next) => {
       next({ path: "/dashboard/analysis" });
       // NProgress.done();
     } else {
-      const hasRoleId = store.getters.roleId && store.getters.roleId.length > 0;
 
-      if (hasRoleId) {
+      const hasUserType = store.getters.userType && store.getters.userType.length > 0;
+
+      if (hasUserType) {
         next();
       } else {
         try {
-          // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-          const { roleId } = await store.dispatch("GetInfo");
+
+          const {user_type} = await store.dispatch("GetInfo", "");
 
           // generate accessible routes map based on roles
           // 模拟后台返回路由权限数据
+          // const user_type = store.getters.userType;
           const accessRoutes = await store.dispatch(
             "GenerateRoutesByEnd",
-            roleId
+            user_type
           );
           // 模拟本地获取路由权限数据
           // const accessRoutes = await store.dispatch("GenerateRoutes", roleId);

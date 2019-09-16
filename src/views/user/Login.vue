@@ -119,7 +119,7 @@ export default {
       });
     },
     loginSuccess(res) {
-      console.log(res);
+      
       this.$router.push({ name: "Dashboard" });
       // 延迟一秒显示欢迎信息
       setTimeout(() => {
@@ -159,4 +159,3 @@ export default {
   }
 }
 </style>
-
