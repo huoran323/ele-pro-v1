@@ -6,7 +6,7 @@ import router from "./router";
 import store from "./store";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
-
+import i18n from "./i18n/i18n";
 import { VueAxios } from "./utils/request";
 
 import "@/styles/index.less";
@@ -28,5 +28,6 @@ Vue.use(VueAxios);
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount("#app");

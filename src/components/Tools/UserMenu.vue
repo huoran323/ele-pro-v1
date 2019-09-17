@@ -36,15 +36,17 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
+      <lang-select></lang-select>
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
 import NoticeIcon from "@/components/NoticeIcon";
+import LangSelect from "./LangSelect.vue";
 export default {
   name: "UserMenu",
-  components: { NoticeIcon },
+  components: { NoticeIcon, LangSelect },
   methods: {
     ...mapActions(["Logout"]),
     ...mapGetters(["nickname", "avatar"]),

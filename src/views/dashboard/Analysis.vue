@@ -74,7 +74,7 @@
       <div>
         <div class="extra-wrapper">
           <div class="extra-item">
-            <a>今日</a>
+            <a>{{$t('analysis.today')}}</a>
             <a>本周</a>
             <a>本月</a>
             <a>本年</a>
@@ -88,7 +88,7 @@
           ></el-date-picker>
         </div>
         <el-tabs v-model="tabItem">
-          <el-tab-pane label="销售额" name="tab1" :lazy="true">
+          <el-tab-pane :label="$t('analysis.sales')" name="tab1" :lazy="true">
             <el-row :gutter="24">
               <el-col :xl="16" :md="12" :sm="24">
                 <bar title="销售额排行" v-if="'tab1' === tabItem" />
