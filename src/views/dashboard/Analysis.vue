@@ -75,9 +75,9 @@
         <div class="extra-wrapper">
           <div class="extra-item">
             <a>{{$t('analysis.today')}}</a>
-            <a>本周</a>
-            <a>本月</a>
-            <a>本年</a>
+            <a>{{$t('analysis.week')}}</a>
+            <a>{{$t('analysis.month')}}</a>
+            <a>{{$t('analysis.year')}}</a>
           </div>
           <el-date-picker
             size="small"
