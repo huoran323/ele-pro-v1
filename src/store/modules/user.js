@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 import { login, getInfo, logout } from "@/api/login";
-import { ACCESS_TOKEN } from "@/store/mutation-types";
+import { ACCESS_TOKEN, USER_NAME } from "@/store/mutation-types";
 
 const user = {
   state: {
@@ -33,7 +33,7 @@ const user = {
     }
   },
   actions: {
-    Login({ commit, dispatch }, userInfo) {
+    Login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo)
           .then(res => {
@@ -42,6 +42,7 @@ const user = {
             // Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000);
             // commit("SET_TOKEN", result.token);
 
+            Vue.ls.set(USER_NAME, userInfo.username);
             Vue.ls.set(ACCESS_TOKEN, res.token, 7 * 24 * 60 * 60 * 1000);
             commit("SET_TOKEN", res.token);
             resolve();
@@ -53,12 +54,10 @@ const user = {
     },
 
     // 获取用户信息
-    GetInfo({ commit }, user_type) {
+    GetInfo({ commit }, username) {
       return new Promise((resolve, reject) => {
-
-        getInfo({user_type: user_type})
+        getInfo({ username: username })
           .then(response => {
-
             const { data } = response;
             const { user_type } = data;
 
@@ -96,7 +95,7 @@ const user = {
       return new Promise(resolve => {
         commit("SET_TOKEN", "");
         commit("SET_USERTYPE", "");
-        Vue.ls.remove(USER_TYPE);
+        Vue.ls.remove(ACCESS_TOKEN);
         resolve();
       });
     }

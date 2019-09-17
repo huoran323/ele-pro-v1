@@ -4,7 +4,7 @@ import store from "./store";
 import { Message } from "element-ui";
 // import NProgress from "nprogress"; // 引入加载进度条
 // import "nprogress/nprogress.css"; // progress bar style
-import { ACCESS_TOKEN, USER_TYPE } from "@/store/mutation-types";
+import { ACCESS_TOKEN, USER_NAME } from "@/store/mutation-types";
 
 const whiteList = ["login"]; // no redirect whitelist
 
@@ -26,15 +26,16 @@ router.beforeEach(async (to, from, next) => {
       next({ path: "/dashboard/analysis" });
       // NProgress.done();
     } else {
-
-      const hasUserType = store.getters.userType && store.getters.userType.length > 0;
+      const hasUserType =
+        store.getters.userType && store.getters.userType.length > 0;
 
       if (hasUserType) {
         next();
       } else {
         try {
-
-          const {user_type} = await store.dispatch("GetInfo", "");
+          // 获取到用户名
+          const username = Vue.ls.get(USER_NAME);
+          const { user_type } = await store.dispatch("GetInfo", username);
 
           // generate accessible routes map based on roles
           // 模拟后台返回路由权限数据

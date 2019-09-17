@@ -38,22 +38,22 @@
             <ul>
               <li v-for="(item, index) in activities" :key="index">
                 <div class="activity">
-                  <el-avatar :src="item.user.avatar" size="small" style="align-item: center"></el-avatar>
+                  <el-avatar :src="item.avatar" size="small" style="align-item: center"></el-avatar>
                   <div class="activity-content">
                     <div
                       style="margin-left:20px;position:relative;line-height:22px;margin-top:20px"
                     >
-                      {{ item.user.nickname }}
+                      {{ item.nickname }}
                       &nbsp;
                       在&nbsp;
                       <a
                         href="#"
-                      >{{ item.project.name }}</a>
+                      >{{ item.name }}</a>
                       &nbsp;
-                      {{ item.project.action }}&nbsp;
+                      {{ item.action }}&nbsp;
                       <a
                         href="#"
-                      >{{ item.project.event }}</a>
+                      >{{ item.event }}</a>
                     </div>
                     <div style="margin-left:20px;line-height:22px">{{ item.time }}</div>
                   </div>
@@ -139,12 +139,12 @@ export default {
     getProjects() {
       this.$store.commit("SHOW_LOADING");
 
-      this.$http.get("/list/search/projects").then(res => {
-        this.projects = res.data && res.data.data;
+      this.$http.get("/workplace/projects").then(res => {
+        this.projects = res.data;
       });
     },
     getActivity() {
-      this.$http.get("/workplace/activity").then(res => {
+      this.$http.get("/workplace/activities").then(res => {
         this.activities = res.data;
       });
     },
