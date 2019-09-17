@@ -1,3 +1,4 @@
 export default {
-  Dashboard: "Dashboard"
+  driver: "Driver",
+  dashboard: "Dashboard"
 };

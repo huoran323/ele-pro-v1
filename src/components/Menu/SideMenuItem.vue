@@ -46,6 +46,7 @@ export default {
         });
       }
 
+      //const title = menu.meta.title;
       return (
         <el-menu-item index={menu.path}>
           {this.renderIcon(menu.meta.icon)}

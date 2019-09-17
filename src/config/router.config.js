@@ -14,7 +14,7 @@ export const asyncRouterMap = [
         name: "Driver",
         component: () => import("@/views/driver"),
         meta: {
-          title: "引导指南",
+          title: "driver",
           icon: "el-icon-s-flag"
         }
       },
@@ -25,7 +25,7 @@ export const asyncRouterMap = [
         redirect: "/dashboard/analysis",
         component: RouteView,
         meta: {
-          title: "仪表盘",
+          title: "dashboard",
           keepAlive: false,
           icon: "el-icon-s-help",
           roles: ["admin", "editor"]
