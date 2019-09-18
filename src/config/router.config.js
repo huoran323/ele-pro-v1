@@ -5,7 +5,7 @@ export const asyncRouterMap = [
     path: "/",
     name: "index",
     component: BasicLayout,
-    meta: { title: "首页", roles: ["admin", "editor"] },
+    meta: { title: "home", roles: ["admin", "editor"] },
     redirect: "/dashboard/analysis",
     children: [
       // driver
@@ -35,14 +35,14 @@ export const asyncRouterMap = [
             path: "/dashboard/analysis",
             name: "Analysis",
             component: () => import("@/views/dashboard/Analysis"),
-            meta: { title: "分析页", keepAlive: true }
+            meta: { title: "analysis", keepAlive: true }
           },
           {
             path: "/dashboard/workplace",
             name: "Workplace",
             component: () => import("@/views/dashboard/Workplace"),
             meta: {
-              title: "工作台",
+              title: "workplace",
               keepAlive: true,
               roles: ["admin", "editor"]
             }
@@ -56,7 +56,7 @@ export const asyncRouterMap = [
         redirect: "/form/base-form",
         component: PageView,
         meta: {
-          title: "表单页",
+          title: "form",
           icon: "el-icon-info",
           roles: ["admin", "editor"]
         },
@@ -66,7 +66,7 @@ export const asyncRouterMap = [
             name: "BaseForm",
             component: () => import("@/views/form/BasicForm"),
             meta: {
-              title: "基础表单",
+              title: "baseform",
               roles: ["admin", "editor"]
             }
           }
@@ -78,20 +78,20 @@ export const asyncRouterMap = [
         name: "List",
         component: PageView,
         redirect: "/list/table-list",
-        meta: { title: "列表页", icon: "el-icon-tickets" },
+        meta: { title: "list", icon: "el-icon-tickets" },
         children: [
           {
             path: "/list/table-list",
             name: "TableListWrapper",
             hideChildrenInMenu: true,
             component: () => import("@/views/list/TableList"),
-            meta: { title: "普通表格", keepAlive: true }
+            meta: { title: "tablelistwrapper", keepAlive: true }
           },
           {
             path: "/list/table-complex",
             name: "TableListComplex",
             component: () => import("@/views/list/TableComplex"),
-            meta: { title: "复杂表格", keepAlive: false }
+            meta: { title: "tablelistcomplex", keepAlive: false }
           }
         ]
       },
@@ -100,14 +100,14 @@ export const asyncRouterMap = [
         name: "Exception",
         component: RouteView,
         redirect: "/exception/404",
-        meta: { title: "异常页", icon: "el-icon-lollipop" },
+        meta: { title: "exception", icon: "el-icon-lollipop" },
         children: [
           {
             path: "/exception/404",
             name: "Exception404",
             component: () =>
               import(/* webpackChunkName: "fail" */ "@/views/exceptions/404"),
-            meta: { title: "404" }
+            meta: { title: "exception404" }
           }
         ]
       }

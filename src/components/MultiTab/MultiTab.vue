@@ -45,7 +45,7 @@ export default {
     const panes = pages.map(page => {
       return (
         <el-tab-pane
-          label={page.meta.title}
+          label={this.$t(`menu.${page.meta.title}`)}
           name={page.path}
           key={page.path}
         ></el-tab-pane>

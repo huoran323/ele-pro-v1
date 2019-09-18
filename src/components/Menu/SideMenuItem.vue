@@ -47,10 +47,11 @@ export default {
       }
 
       //const title = menu.meta.title;
+      const title = `menu.${menu.meta.title}`;
       return (
         <el-menu-item index={menu.path}>
           {this.renderIcon(menu.meta.icon)}
-          <span>{menu.meta.title}</span>
+          <span>{this.$t(`menu.${menu.meta.title}`)}</span>
         </el-menu-item>
       );
     },
@@ -64,11 +65,12 @@ export default {
         });
       }
 
+      //国际化在渲染函数中的应用
       return (
         <el-submenu index={menu.path}>
           <div slot="title">
             {this.renderIcon(menu.meta.icon)}
-            <span>{menu.meta.title}</span>
+            <span>{this.$t(`menu.${menu.meta.title}`)}</span>
           </div>
           {itemArr}
         </el-submenu>

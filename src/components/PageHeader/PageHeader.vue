@@ -5,7 +5,7 @@
       <div class="detail">
         <div class="main" v-if="!$route.meta.hiddenHeaderContent">
           <div class="row">
-            <h1 v-if="title" class="title">{{title}}</h1>
+            <h1 v-if="title" class="title">{{$t(`menu.${title}`)}}</h1>
           </div>
           <div class="row">
             <div class="headerContent">
