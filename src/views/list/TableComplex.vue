@@ -29,8 +29,8 @@
             <span>{{(currentPage - 1) * pageSize + scope.$index + 1}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="order" label="订单号"></el-table-column>
-        <el-table-column prop="dateTime" label="下单时间"></el-table-column>
+        <el-table-column prop="order_no" label="订单号"></el-table-column>
+        <el-table-column prop="time" label="下单时间"></el-table-column>
         <el-table-column prop="address" label="配送地址" width="280"></el-table-column>
         <el-table-column prop="phone" label="联系电话"></el-table-column>
         <el-table-column prop="name" label="配送员"></el-table-column>
@@ -177,94 +177,40 @@ export default {
     }
   },
   mounted() {
-    this.getData();
+    this.getData(this.currentPage, this.pageSize);
   },
   methods: {
     // 获取数据
-    getData() {
-      getComplexList().then(res => {
-        this.all_list = res.data.tableList;
-        this.total = res.data.count;
-        this.schArr = this.all_list;
-        this.getPageData();
+    getData(page, pageSize) {
+      getComplexList({ page: page, pageSize: pageSize }).then(res => {
+        this.tableList = res.data.data;
+        this.total = res.data.total;
       });
     },
     handleCurrentChange(val) {
       this.currentPage = val;
-      this.getPageData();
+      this.getData(this.currentPage, this.pageSize);
     },
     handleSizeChange(val) {
       this.pageSize = val;
-      this.getPageData();
+      this.getData(this.currentPage, this.pageSize);
     },
-    getPageData() {
-      let start = (this.currentPage - 1) * this.pageSize;
-      let end = start + this.pageSize;
-      this.tableList = this.schArr.slice(start, end);
-    },
+
     // 搜索
-    searchTab() {
-      let arrList = [];
-      for (let item of this.all_list) {
-        if (
-          this.sch_order.trim() === "" &&
-          this.sch_status === null &&
-          this.sch_date === null
-        ) {
-          arrList = this.all_list;
-          break;
-        } else if (
-          item.order.startsWith(this.sch_order) &&
-          (this.sch_status !== null ? item.status === this.sch_status : true) &&
-          (this.sch_date !== null
-            ? item.dateTime.startsWith(this.sch_date)
-            : true)
-        ) {
-          //Object.assign() 方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。Object.assign(target, ...sources);将item赋值给{}
-          let obj = Object.assign({}, item);
-          arrList.push(obj);
-        }
-      }
-      this.schArr = arrList;
-      this.total = arrList.length;
-      this.currentPage = 1;
-      this.pageSize = 10;
-      this.getPageData();
-    },
+    searchTab() {},
     // 添加
-    addTab() {
-      this.diaIsShow = true;
-      this.formData = {};
-      this.editType = "add";
-      this.$nextTick(() => {
-        this.$refs.diaForm.clearValidate();
-      });
-    },
+    addTab() {},
     changeTab(form, type) {
       // 验证表单
       this.$refs[form].validate(valid => {
         if (valid) {
           if (type === "update") {
-            // 改变整个表格数据
-            let start = (this.currentPage - 1) * this.pageSize;
-            this.all_list[start + this.rowIndex] = Object.assign(
-              {},
-              this.formData
-            );
-            // 解决数组不能通过索引响应数据变化
-            this.$set(
-              this.tableList,
-              this.rowIndex,
-              Object.assign({}, this.formData)
-            );
             this.$notify({
               title: "成功",
               message: "订单已修改成功",
               type: "success"
             });
           } else {
-            this.tableList.unshift(Object.assign({}, this.formData));
-            this.all_list.push(Object.assign({}, this.formData));
           }
           this.diaIsShow = false;
         } else {
@@ -273,24 +219,9 @@ export default {
       });
     },
     // 编辑
-    editTable(index, row) {
-      this.formData = Object.assign({}, row);
-      this.editType = "update";
-      this.diaIsShow = true;
-      this.$nextTick(() => {
-        this.$refs.diaForm.clearValidate();
-      });
-      this.rowIndex = index;
-    },
+    editTable(index, row) {},
     // 审核
-    toConfirm(row) {
-      row.status = 2;
-      this.$notify({
-        title: "成功",
-        message: "审核提交成功",
-        type: "success"
-      });
-    }
+    toConfirm(row) {}
   }
 };
 </script>

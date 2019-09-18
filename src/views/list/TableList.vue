@@ -3,7 +3,7 @@
     <el-card>
       <div slot="header">基础表格</div>
       <el-table :data="tableData" border>
-        <el-table-column prop="date" label="日期"></el-table-column>
+        <el-table-column prop="time" label="日期"></el-table-column>
         <el-table-column prop="name" label="名字"></el-table-column>
         <el-table-column prop="address" label="地址"></el-table-column>
       </el-table>
@@ -18,12 +18,12 @@
           </template>
         </el-table-column>
         <el-table-column prop="name" label="姓名"></el-table-column>
-        <el-table-column prop="dateTime" label="时间"></el-table-column>
-        <el-table-column prop="type" label="状态" align="center">
+        <el-table-column prop="time" label="时间"></el-table-column>
+        <el-table-column prop="status" label="状态" align="center">
           <template slot-scope="scope">
-            <el-tag :type="scope.row.type | tagClass">
+            <el-tag :type="scope.row.status | tagClass">
               {{
-              scope.row.type | typeText
+              scope.row.status | typeText
               }}
             </el-tag>
           </template>
@@ -86,14 +86,14 @@ export default {
   },
   methods: {
     getBasicTable() {
-      getBasicList().then(res => {
-        this.tableData = res.data;
+      getBasicList({ page: 1, pageSize: 5 }).then(res => {
+        this.tableData = res.data.data;
       });
     },
     getPageTable(current, size) {
       getPageList({ page: current, pageSize: size }).then(res => {
         this.pageData = res.data.data;
-        this.total = res.data.count;
+        this.total = res.data.total;
       });
     },
     handleCurrentChange(val) {

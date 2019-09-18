@@ -1,23 +1,25 @@
 import { axios } from "@/utils/request";
 
-export const getBasicList = () => {
+export const getBasicList = parameter => {
   return axios({
-    url: "/table/getBasicList",
-    method: "get"
+    url: "/list/getBasicList",
+    method: "get",
+    params: parameter
   });
 };
 
 export const getPageList = parameter => {
   return axios({
-    url: "/table/getPageList",
-    method: "post",
-    data: parameter
+    url: "/list/getPageList",
+    method: "get",
+    params: parameter
   });
 };
 
-export const getComplexList = () => {
+export const getComplexList = parameter => {
   return axios({
-    url: "/table/getComplexList",
-    method: "get"
+    url: "/list/getComplexList",
+    method: "get",
+    params: parameter
   });
 };
