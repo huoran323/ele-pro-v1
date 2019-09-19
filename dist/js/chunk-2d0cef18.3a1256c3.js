@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0cef18"],{6239:function(n,e,t){"use strict";t.r(e);var c=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div",[n._v("基础表单页面")])},r=[],u={name:"BasicForm",data:function(){return{description:"表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。"}}},a=u,i=t("2877"),o=Object(i["a"])(a,c,r,!1,null,null,null);e["default"]=o.exports}}]);
+//# sourceMappingURL=chunk-2d0cef18.3a1256c3.js.map
