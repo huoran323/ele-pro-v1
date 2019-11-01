@@ -5,10 +5,10 @@
         <div class="header">
           <a href="/">
             <!-- <img src="~@/assets/logo.svg" class="logo" alt="logo" /> -->
-            <span class="title">VUE 后台管理系统</span>
+            <span class="title" style="color: #4592fe">VUE 后台管理系统</span>
           </a>
         </div>
-        <div class="desc">---不积跬步，无以至千里；不积小流，无以成江海</div>
+        <div class="desc" style="color: #666">---不积跬步，无以至千里；不积小流，无以成江海</div>
       </div>
 
       <router-view></router-view>
@@ -43,7 +43,8 @@ export default {
     box-sizing: border-box;
     width: 100%;
     min-height: 100%;
-    background: #f0f2f5 url(~@/assets/background.svg) no-repeat 50%;
+    background: #f0f2f5 url(~@/assets/pageBg/bg.png) no-repeat 50%;
+    // background: #f0f2f5 url(~@/assets/background.svg) no-repeat 50%;
     // background: #f0f2f5 url(~@/assets/pageBg/login.jpeg) no-repeat 50%;
     background-size: 100%;
     padding: 110px 0 144px;
@@ -55,6 +56,8 @@ export default {
 
     .top {
       text-align: center;
+      margin: 0 auto;
+      width: 400px;
 
       .header {
         height: 44px;

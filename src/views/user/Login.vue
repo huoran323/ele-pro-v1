@@ -45,7 +45,7 @@
       </el-tabs>
 
       <el-form-item>
-        <el-checkbox>自动登录</el-checkbox>
+        <el-checkbox style="color: #4592fe">自动登录</el-checkbox>
         <!-- <router-link
           :to="{ name: 'recover', params: { user: 'aaa'} }"
           class="forge-password"
@@ -119,7 +119,6 @@ export default {
       });
     },
     loginSuccess(res) {
-      
       this.$router.push({ name: "Dashboard" });
       // 延迟一秒显示欢迎信息
       setTimeout(() => {
