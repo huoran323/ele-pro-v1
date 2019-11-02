@@ -7,7 +7,7 @@ import { ACCESS_TOKEN } from "@/store/mutation-types";
 import { Notification, Loading } from "element-ui";
 
 // 在全局请求和响应拦截器中添加请求状态
-let loading = null;
+// let loading = null;
 
 // 创建 axios 实例
 const service = axios.create({
@@ -22,9 +22,9 @@ const service = axios.create({
 });
 
 const err = error => {
-  if (loading) {
-    loading.close();
-  }
+  // if (loading) {
+  //   loading.close();
+  // }
 
   if (error.response) {
     const data = error.response.data;
@@ -57,12 +57,12 @@ const err = error => {
 
 // 请求拦截器
 service.interceptors.request.use(config => {
-  loading = Loading.service({ text: "拼命加载中" });
+  // loading = Loading.service({ text: "拼命加载中" });
   const token = Vue.ls.get(ACCESS_TOKEN);
 
   if (token) {
     // config.headers["token"] = token; // 让每个请求携带自定义 token 请根据实际情况自行修改
-    
+
     config.headers["Authorization"] = `Bearer ${token}`;
   }
   config.data = Qs.stringify(config.data);
@@ -77,9 +77,9 @@ service.interceptors.request.use(config => {
 // response interceptor
 // 响应拦截器
 service.interceptors.response.use(response => {
-  if (loading) {
-    loading.close();
-  }
+  // if (loading) {
+  //   loading.close();
+  // }
 
   switch (response.data.code) {
     // 请求成功
