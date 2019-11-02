@@ -6,6 +6,7 @@ export default {
   workplace: "Workplace",
   form: "Form",
   baseform: "BaseForm",
+  newsform: "NewsForm",
   list: "List",
   tablelistwrapper: "TableListWrapper",
   tablelistcomplex: "TableListComplex",

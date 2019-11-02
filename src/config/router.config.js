@@ -69,6 +69,15 @@ export const asyncRouterMap = [
               title: "baseform",
               roles: ["admin", "editor"]
             }
+          },
+          {
+            path: "/form/news-form",
+            name: "NewsForm",
+            component: () => import("@/views/form/NewsForm"),
+            meta: {
+              title: "newsform",
+              roles: ["admin", "editor"]
+            }
           }
         ]
       },
