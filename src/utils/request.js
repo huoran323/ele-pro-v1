@@ -65,7 +65,10 @@ service.interceptors.request.use(config => {
 
     config.headers["Authorization"] = `Bearer ${token}`;
   }
-  config.data = Qs.stringify(config.data);
+  if (config.headers["Content-Type"] === "application/x-www-form-urlencoded") {
+    config.data = Qs.stringify(config.data);
+  }
+
   // config.data = qs.stringify(config.data, {
   //   arrayFormat: "indices",
   //   allowDots: true

@@ -56,18 +56,23 @@
     <div>
       <el-dialog :title="dialogTitle" width="80%" :visible.sync="dialogStatus">
         <div>
-          <el-form :model="newsDetail" ref="newsDetail" label-width="120px">
-            <el-form-item label="新闻标题">
+          <el-form
+            :model="newsDetail"
+            ref="newsDetail"
+            :rules="newsDetailRules"
+            label-width="120px"
+          >
+            <el-form-item label="新闻标题" prop="news_title">
               <el-input placeholder="请输入新闻标题" v-model="newsDetail.news_title"></el-input>
             </el-form-item>
             <el-row :gutter="20">
               <el-col :span="12">
-                <el-form-item label="新闻来源">
+                <el-form-item label="新闻来源" prop="news_source">
                   <el-input placeholder="请输入新闻来源" v-model="newsDetail.news_source"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="新增类型">
+                <el-form-item label="新增类型" prop="news_type">
                   <el-select v-model="newsDetail.news_type" style="width: 100%">
                     <el-option
                       v-for="item in typeList"
@@ -79,12 +84,27 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-form-item label="新闻详情">
+            <el-form-item label="新闻详情" prop="news_detail">
               <vue-ueditor-wrap v-model="newsDetail.news_detail" :config="myConfig"></vue-ueditor-wrap>
+            </el-form-item>
+            <el-form-item label="新闻图片" prop="news_img">
+              <el-upload
+                class="avatar-uploader"
+                :action="'#'"
+                :disabled="dialogTitle === '查看'"
+                :show-file-list="false"
+                :before-upload="beforeAvatarUpload"
+              >
+                <img v-if="imgUrl" :src="imgUrl" class="avatar" alt />
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
             </el-form-item>
           </el-form>
         </div>
-        <div></div>
+        <div slot="footer">
+          <el-button type="primary" size="small" @click="saveSupplierTech">保存</el-button>
+          <el-button @click="dialogStatus = false" size="small">取消</el-button>
+        </div>
       </el-dialog>
     </div>
   </div>
@@ -105,6 +125,7 @@ const types = [
   }
 ];
 import VueUeditorWrap from "vue-ueditor-wrap";
+import * as api from "@/api/news.js";
 export default {
   components: { VueUeditorWrap },
   data() {
@@ -125,8 +146,10 @@ export default {
         news_title: "", //新闻标题
         news_source: "", //新闻来源
         news_type: "", //新闻类型
-        news_detail: "" //新闻详情
+        news_detail: "", //新闻详情
+        news_img: "" //新闻图片
       },
+      imgUrl: "", //上传图片
       myConfig: {
         // 编辑器不自动被内容撑高
         autoHeightEnabled: false,
@@ -135,11 +158,42 @@ export default {
         // 初始容器宽度
         initialFrameWidth: "100%",
         // 上传文件接口（这个地址是我为了方便各位体验文件上传功能搭建的临时接口，请勿在生产环境使用！！！）
-        serverUrl: "http://139.9.194.191:5020/hbdldx/ueditor/exec",
+        serverUrl: "",
         // UEditor 资源文件的存放路径，如果你使用的是 vue-cli 生成的项目，通常不需要设置该选项，vue-ueditor-wrap 会自动处理常见的情况，如果需要特殊配置，参考下方的常见问题2
         UEDITOR_HOME_URL: "/UEditor/"
         // imageUrlPrefix: "",
         // imagePathFormat: "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}"
+      },
+      // 表单验证
+      newsDetailRules: {
+        news_title: [
+          {
+            required: true,
+            message: "新闻标题不能为空",
+            trigger: "blur"
+          }
+        ],
+        news_source: [
+          {
+            required: true,
+            message: "新闻来源不能为空",
+            trigger: "blur"
+          }
+        ],
+        news_type: [
+          {
+            required: true,
+            message: "新闻类型不能为空",
+            trigger: "change"
+          }
+        ],
+        news_detail: [
+          {
+            required: true,
+            message: "新闻内容不能为空",
+            trigger: "blur"
+          }
+        ]
       }
     };
   },
@@ -168,6 +222,28 @@ export default {
     handleCurrentChange(e) {
       this.pageNum = e;
       // this.getNewList();
+    },
+    /**
+      图片上传
+     */
+    beforeAvatarUpload(file) {
+      console.log("file --", file);
+      let formData = new FormData();
+      formData.append("file", file);
+      console.log("formData --", formData);
+
+      api.upload(formData).then(res => {
+        this.imgUrl = "/" + res.data.path;
+      });
+    },
+    /**
+      保存
+     */
+    saveSupplierTech() {
+      this.$refs["newsDetail"].validate(valid => {
+        if (valid) {
+        }
+      });
     }
   }
 };
@@ -186,5 +262,34 @@ export default {
       text-align: right;
     }
   }
+}
+.avatar-uploader {
+  text-align: left;
+
+  .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    background-color: #409eff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    &:hover {
+      border-color: #409eff;
+    }
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    border: 1px dashed #d9d9d9;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
 }
 </style>
