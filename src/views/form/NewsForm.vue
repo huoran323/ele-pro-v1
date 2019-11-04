@@ -143,6 +143,7 @@ export default {
       dialogTitle: "新增", //弹出框标题
       dialogStatus: false, //控制新增查看弹出框
       newsDetail: {
+        news_id: "",
         news_title: "", //新闻标题
         news_source: "", //新闻来源
         news_type: "", //新闻类型
@@ -197,7 +198,21 @@ export default {
       }
     };
   },
+  created() {
+    this.getNewsList();
+  },
   methods: {
+    getNewsList() {
+      api
+        .getNewsList({
+          page: this.pageNum,
+          pageSize: this.pageSize,
+          news_type: this.searchForm.type_new
+        })
+        .then(res => {
+          console.log(" res --", res);
+        });
+    },
     /**
       新增，查看
      */
@@ -227,21 +242,36 @@ export default {
       图片上传
      */
     beforeAvatarUpload(file) {
-      console.log("file --", file);
       let formData = new FormData();
       formData.append("file", file);
-      console.log("formData --", formData);
-
       api.upload(formData).then(res => {
-        this.imgUrl = "/" + res.data.path;
+        this.newsDetail.news_img = res.data.url;
+        this.imgUrl = res.data.url;
       });
     },
     /**
-      保存
+      新增、修改 保存
      */
     saveSupplierTech() {
       this.$refs["newsDetail"].validate(valid => {
         if (valid) {
+          let params = {};
+          if (this.dialogTitle === "新增") {
+            params = this.newsDetail;
+          } else {
+            params = { ...this.newsDetail, new_id: "" };
+          }
+
+          api.saveNews(params).then(res => {
+            if (res) {
+              this.$message({
+                type: "success",
+                message: res.msg
+              });
+              this.getNewsList();
+              this.dialogStatus = false;
+            }
+          });
         }
       });
     }

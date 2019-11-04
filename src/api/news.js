@@ -11,3 +11,20 @@ export const upload = parameter => {
     }
   });
 };
+
+//新闻保存
+export const saveNews = parameter => {
+  return axios({
+    url: "/news/save",
+    method: "post",
+    data: parameter
+  });
+};
+
+export const getNewsList = parameter => {
+  return axios({
+    url: "/news/getNewsList",
+    method: "post",
+    data: parameter
+  });
+};
