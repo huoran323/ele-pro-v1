@@ -21,9 +21,19 @@ export const saveNews = parameter => {
   });
 };
 
+// 获取新闻列表
 export const getNewsList = parameter => {
   return axios({
     url: "/news/getNewsList",
+    method: "post",
+    data: parameter
+  });
+};
+
+// 删除新闻数据
+export const deleteNews = parameter => {
+  return axios({
+    url: "/news/deleteNews",
     method: "post",
     data: parameter
   });

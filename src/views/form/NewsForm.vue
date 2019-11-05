@@ -6,7 +6,7 @@
         <el-row :gutter="24">
           <el-col :sm="8" :md="8" :lg="8" :xl="8">
             <el-form-item label="新闻类型">
-              <el-select v-model="searchForm.type_new">
+              <el-select v-model="searchForm.type_new" clearable>
                 <el-option
                   v-for="item in typeList"
                   :key="item.val"
@@ -17,7 +17,7 @@
             </el-form-item>
           </el-col>
           <el-col :sm="16" :md="16" :lg="16" :xl="16" style="text-align: right">
-            <el-button size="small" type="success">查询</el-button>
+            <el-button size="small" type="success" @click="getNewsList">查询</el-button>
             <el-button size="small" type="primary" @click="editRow({},'新增')">新增</el-button>
           </el-col>
         </el-row>
@@ -26,6 +26,7 @@
     <!-- 列表 -->
     <div>
       <el-table
+        :data="tableList"
         border
         highlight-current-row
         :header-cell-style="{
@@ -39,9 +40,25 @@
             <span>{{(pageNum - 1) * pageSize + scope.$index + 1}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="新闻标题" align="center"></el-table-column>
-        <el-table-column label="新闻类型" width="200" align="center"></el-table-column>
-        <el-table-column label="编辑" width="300" align="center"></el-table-column>
+        <el-table-column label="新闻标题" align="center" prop="news_title"></el-table-column>
+        <el-table-column label="新闻类型" width="200" align="center" prop="news_type">
+          <template slot-scope="scope">
+            <span>
+              {{
+              scope.row.news_type | typeText
+              }}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="编辑" width="300" align="center">
+          <template slot-scope="scope">
+            <el-button type="text" class="button-green" @click="editRow(scope.row,'修改')">修改</el-button>
+            <div class="split-line"></div>
+            <el-button type="text" class="button-red" @click="delRow(scope.row)">删除</el-button>
+            <div class="split-line"></div>
+            <el-button type="text" class="button-blue" @click="editRow(scope.row,'查看')">查看</el-button>
+          </template>
+        </el-table-column>
       </el-table>
       <el-pagination
         @size-change="handleSizeChange"
@@ -54,7 +71,7 @@
     </div>
     <!-- 新增，编辑，查看 -->
     <div>
-      <el-dialog :title="dialogTitle" width="80%" :visible.sync="dialogStatus">
+      <el-dialog :title="dialogTitle" width="80%" :visible.sync="dialogStatus" @close="closeDiaCb">
         <div>
           <el-form
             :model="newsDetail"
@@ -63,29 +80,50 @@
             label-width="120px"
           >
             <el-form-item label="新闻标题" prop="news_title">
-              <el-input placeholder="请输入新闻标题" v-model="newsDetail.news_title"></el-input>
+              <el-input
+                placeholder="请输入新闻标题"
+                v-model="newsDetail.news_title"
+                :disabled="dialogTitle === '查看'"
+              ></el-input>
             </el-form-item>
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item label="新闻来源" prop="news_source">
-                  <el-input placeholder="请输入新闻来源" v-model="newsDetail.news_source"></el-input>
+                  <el-input
+                    placeholder="请输入新闻来源"
+                    v-model="newsDetail.news_source"
+                    :disabled="dialogTitle === '查看'"
+                  ></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="新增类型" prop="news_type">
-                  <el-select v-model="newsDetail.news_type" style="width: 100%">
+                <el-form-item label="新闻类型" prop="news_type">
+                  <el-select
+                    v-model="newsDetail.news_type"
+                    style="width: 100%"
+                    :disabled="dialogTitle === '查看'"
+                  >
                     <el-option
                       v-for="item in typeList"
-                      :key="item.val"
+                      :key="item.news_type"
                       :label="item.name"
-                      :value="item.val"
+                      :value="item.news_type"
                     ></el-option>
                   </el-select>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-form-item label="新闻详情" prop="news_detail">
-              <vue-ueditor-wrap v-model="newsDetail.news_detail" :config="myConfig"></vue-ueditor-wrap>
+              <vue-ueditor-wrap
+                v-model="newsDetail.news_detail"
+                :config="myConfig"
+                v-if="dialogTitle !== '查看'"
+              ></vue-ueditor-wrap>
+              <div
+                class="ueditor-wrap"
+                v-else
+                v-html="newsDetail.news_detail"
+              >{{newsDetail.news_detail}}</div>
             </el-form-item>
             <el-form-item label="新闻图片" prop="news_img">
               <el-upload
@@ -102,7 +140,12 @@
           </el-form>
         </div>
         <div slot="footer">
-          <el-button type="primary" size="small" @click="saveSupplierTech">保存</el-button>
+          <el-button
+            type="primary"
+            size="small"
+            @click="saveSupplierTech"
+            v-if="dialogTitle !== '查看'"
+          >保存</el-button>
           <el-button @click="dialogStatus = false" size="small">取消</el-button>
         </div>
       </el-dialog>
@@ -112,15 +155,15 @@
 <script>
 const types = [
   {
-    val: 1,
+    news_type: "1",
     name: "技术服务功能"
   },
   {
-    val: 2,
+    news_type: "2",
     name: "政策法规"
   },
   {
-    val: 3,
+    news_type: "3",
     name: "能源新闻"
   }
 ];
@@ -139,7 +182,7 @@ export default {
       loading: false,
       pageNum: 1,
       pageSize: 10,
-      totalNum: 10,
+      totalNum: 0,
       dialogTitle: "新增", //弹出框标题
       dialogStatus: false, //控制新增查看弹出框
       newsDetail: {
@@ -202,6 +245,7 @@ export default {
     this.getNewsList();
   },
   methods: {
+    //获取新闻列表
     getNewsList() {
       api
         .getNewsList({
@@ -210,18 +254,49 @@ export default {
           news_type: this.searchForm.type_new
         })
         .then(res => {
-          console.log(" res --", res);
+          if (res) {
+            this.tableList = res.data.data;
+            this.totalNum = res.data.total;
+          }
         });
     },
     /**
       新增，查看
      */
     editRow(row, type) {
-      if (type === "新增") {
-        this.dialogTitle = "新增";
-        this.dialogStatus = true;
-        return;
+      if (type !== "新增") {
+        this.newsDetail.news_id = row.news_id;
+        this.newsDetail.news_title = row.news_title;
+        this.newsDetail.news_source = row.news_source;
+        this.newsDetail.news_type = row.news_type;
+        this.newsDetail.news_detail = row.news_detail;
+        this.newsDetail.news_img = row.news_img;
+        this.imgUrl = row.news_img;
       }
+
+      this.dialogTitle = type;
+      this.dialogStatus = true;
+    },
+    /**
+     * 删除
+     */
+    delRow(row) {
+      this.$confirm("您确定删除这条数据吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(_ => {
+        console.log("row:", row);
+        api.deleteNews({ news_id: row.news_id }).then(res => {
+          if (res) {
+            this.$message({
+              type: "success",
+              message: res.msg
+            });
+            this.getNewsList();
+          }
+        });
+      });
     },
     /**
      * 列表条数改变回调
@@ -229,14 +304,14 @@ export default {
     handleSizeChange(e) {
       this.pageNum = 1;
       this.pageSize = e;
-      // this.getNewList();
+      this.getNewList();
     },
     /**
      * 企业列表页码改变回调
      */
     handleCurrentChange(e) {
       this.pageNum = e;
-      // this.getNewList();
+      this.getNewList();
     },
     /**
       图片上传
@@ -274,6 +349,25 @@ export default {
           });
         }
       });
+    },
+    /**
+     * 关闭弹窗回调函数
+     */
+    closeDiaCb() {
+      this.$refs.newsDetail.resetFields();
+      this.imgUrl = "";
+    }
+  },
+  filters: {
+    typeText(val) {
+      if (val === undefined) return;
+      if (val == 1) {
+        return "技术服务功能";
+      } else if (val == 2) {
+        return "政策法规";
+      } else {
+        return "能源新闻";
+      }
     }
   }
 };
@@ -291,6 +385,31 @@ export default {
     .search-btn-wrap {
       text-align: right;
     }
+  }
+
+  .button-green {
+    color: #40be6c;
+  }
+  .button-red {
+    color: #ff8971;
+  }
+  .button-blue {
+    color: #0090e7;
+  }
+  .split-line {
+    width: 2px;
+    height: 12px;
+    background: #adadad;
+    display: inline-block;
+    margin: 0 8px;
+    vertical-align: middle;
+  }
+
+  .ueditor-wrap {
+    border: 1px solid #ededed;
+    min-height: 200px;
+    max-height: 200px;
+    overflow-y: auto;
   }
 }
 .avatar-uploader {
