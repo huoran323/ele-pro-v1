@@ -7055,6 +7055,7 @@ vue-template-es2015-compiler@^1.9.0:
 vue-ueditor-wrap@^2.4.1:
   version "2.4.1"
   resolved "https://registry.npm.taobao.org/vue-ueditor-wrap/download/vue-ueditor-wrap-2.4.1.tgz#bb0fbc02ce9c7cc6d074f4ace597840f6772e3c1"
+  integrity sha1-uw+8As6cfMbQdPSs5ZeED2dy48E=
 
 vue@^2.6.10:
   version "2.6.10"

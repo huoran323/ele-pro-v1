@@ -64,7 +64,9 @@ export default {
             window.location.reload();
           });
         })
-        .catch(err => {});
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   mounted() {}
