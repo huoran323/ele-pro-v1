@@ -1,8 +1,32 @@
 /**
- * @param {Function} func
- * @param {number} wait
- * @param {boolean} immediate
+ * 防抖函数
+ * @param {Function} func 需要防抖的函数
+ * @param {number} wait 延迟时间
+ * @param {boolean} immediate 是否立即执行
  * @return {*}
+ * 使用样例： 
+ *    import { debounce } from 'xxx'
+ 
+      <div @click="toDoSth(vm)"></div>
+
+      export default {
+        data: {
+          return {
+            vm: this
+          }
+        },
+        methods: {
+          toDoSth: debounce((vm) => {
+            // 这里将当前组件实例当参数传入
+            // 就可以使用实例中定义的一些属性、方法
+            // 补充一下，这里如果换成非箭头函数的写法，也可以直接访问实例。
+          }, 
+          500, 
+          true
+          )
+        }
+      }
+ *    
  */
 // 防抖函数
 export function debounce(func, wait, immediate) {
