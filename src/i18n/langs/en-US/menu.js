@@ -10,6 +10,7 @@ export default {
   list: "List",
   tablelistwrapper: "TableListWrapper",
   tablelistcomplex: "TableListComplex",
+  tablelistnesting: "TableListNesting",
   exception: "Exception",
   exception404: "404"
 };
