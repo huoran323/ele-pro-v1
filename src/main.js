@@ -10,6 +10,7 @@ import i18n from './i18n/i18n';
 import { VueAxios } from './utils/request';
 
 import '@/styles/index.less';
+import '../theme/index.css';
 
 // mock
 // import "./mock";
@@ -29,5 +30,5 @@ new Vue({
     router,
     store,
     i18n,
-    render: h => h(App)
+    render: (h) => h(App),
 }).$mount('#app');
