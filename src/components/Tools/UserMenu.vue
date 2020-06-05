@@ -18,6 +18,13 @@
             </router-link>
           </el-dropdown-item>
           <el-dropdown-item>
+            <span>
+              <i class="el-icon-set-up"></i>&nbsp;
+              <span>主题色</span>
+              <theme-picker style="float: right;height: 26px;margin: 5px 8px 0 10px;" @change="themeChange" />
+            </span>
+          </el-dropdown-item>
+          <el-dropdown-item>
             <router-link :to="{name: 'center'}">
               <span>
                 <i class="el-icon-setting"></i>&nbsp;
@@ -43,10 +50,11 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import NoticeIcon from "@/components/NoticeIcon";
+import ThemePicker from "@/components/ThemePicker/index"
 import LangSelect from "./LangSelect.vue";
 export default {
   name: "UserMenu",
-  components: { NoticeIcon, LangSelect },
+  components: { NoticeIcon, LangSelect, ThemePicker },
   methods: {
     ...mapActions(["Logout"]),
     ...mapGetters(["nickname", "avatar"]),
@@ -67,6 +75,13 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+
+    themeChange(val) {
+      this.$store.dispatch('changeSetting', {
+        key: 'theme',
+        value: val
+      })
     }
   },
   mounted() {}

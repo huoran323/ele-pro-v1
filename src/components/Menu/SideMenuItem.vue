@@ -49,7 +49,7 @@ export default {
       //const title = menu.meta.title;
       const title = `menu.${menu.meta.title}`;
       return (
-        <el-menu-item index={menu.path}>
+        <el-menu-item index={menu.path} >
           {this.renderIcon(menu.meta.icon)}
           <span>{this.$t(`menu.${menu.meta.title}`)}</span>
         </el-menu-item>
