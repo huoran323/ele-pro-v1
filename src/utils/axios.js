@@ -27,11 +27,11 @@ const VueAxios = {
       $http: {
         get: function get() {
           return instance;
+        },
+        post: function post(parameter) {
+          instance.data = Qs.stringify(parameter);
+          return instance;
         }
-        // post: function post(parameter) {
-        //   instance.data = Qs.stringify(parameter);
-        //   return instance;
-        // }
       }
     });
   }
