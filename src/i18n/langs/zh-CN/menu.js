@@ -11,6 +11,7 @@ export default {
     tablelistwrapper: '普通表格',
     tablelistcomplex: '复杂表格',
     tablelistnesting: '嵌套表格',
+    tablelisttesting: '动态表格',
     exception: '异常页',
     exception404: '404',
 };

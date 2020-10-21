@@ -24,6 +24,8 @@ export default {
   },
   methods: {
     getBreadcrumb() {
+
+      // console.log(this.$route);
       this.breadList = [];
 
       this.name = this.$route.name;
