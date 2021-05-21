@@ -132,6 +132,25 @@ export const asyncRouterMap = [
                 ],
             },
             {
+                path: '/test',
+                name: 'TestBMap',
+                component: PageView,
+                redirect: '/test/bmap',
+                meta: {
+                    title: 'testBmap',
+                    icon: 'el-icon-lollipop',
+                },
+                children: [
+                    {
+                        path: '/test/bmap',
+                        name: 'BMap',
+                        component: () =>
+                            import(/* webpackChunkName: "fail" */ '@/views/test/bMap'),
+                        meta: { title: 'bMap' },
+                    },
+                ],
+            },
+            {
                 path: '/exception',
                 name: 'Exception',
                 component: RouteView,

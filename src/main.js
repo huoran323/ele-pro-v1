@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2019-10-28 09:03:24
+ * @LastEditTime: 2021-04-13 12:41:18
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /ele-pro-v1/src/main.js
+ */
 import '@babel/polyfill';
 
 import Vue from 'vue';
