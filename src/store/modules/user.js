@@ -12,7 +12,8 @@ const user = {
     // 用户头像
     avatar: "",
     user_type: "",
-    userInfo: {}
+    userInfo: {},
+    
   },
   mutations: {
     // 存储token

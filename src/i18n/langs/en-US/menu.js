@@ -15,6 +15,7 @@ export default {
     form: 'Form',
     baseform: 'BaseForm',
     newsform: 'NewsForm',
+    excelform: 'ExcelForm',
     list: 'List',
     tablelistwrapper: 'TableListWrapper',
     tablelistcomplex: 'TableListComplex',

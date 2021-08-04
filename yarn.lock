@@ -684,6 +684,11 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
+"@tweenjs/tween.js@^18.6.4":
+  version "18.6.4"
+  resolved "https://registry.npm.taobao.org/@tweenjs/tween.js/download/@tweenjs/tween.js-18.6.4.tgz#40a3d0a93647124872dec8e0fd1bd5926695b6ca"
+  integrity sha1-QKPQqTZHEkhy3sjg/RvVkmaVtso=
+
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/@types/events/download/@types/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
@@ -1849,6 +1854,11 @@ camelcase-keys@^2.0.0:
   dependencies:
     camelcase "^2.0.0"
     map-obj "^1.0.0"
+
+camelcase@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npm.taobao.org/camelcase/download/camelcase-1.2.1.tgz?cache=0&sync_timestamp=1603921799543&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcamelcase%2Fdownload%2Fcamelcase-1.2.1.tgz#9bb5304d2e0b56698b2c758b08a3eaa9daa58a39"
+  integrity sha1-m7UwTS4LVmmLLHWLCKPqqdqlijk=
 
 camelcase@^2.0.0:
   version "2.1.1"
@@ -5383,6 +5393,11 @@ lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17
   version "4.17.14"
   resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.14.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash%2Fdownload%2Flodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
 
+lodash@^4.17.20:
+  version "4.17.21"
+  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=
+
 lodash@~1.0.1:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/lodash/download/lodash-1.0.2.tgz#8f57560c83b59fc270bd3d561b690043430e2551"
@@ -5491,6 +5506,11 @@ map-visit@^1.0.0:
   resolved "https://registry.npm.taobao.org/map-visit/download/map-visit-1.0.0.tgz#ecdca8f13144e660f1b5bd41f12f3479d98dfb8f"
   dependencies:
     object-visit "^1.0.0"
+
+mapvgl@^1.0.0-beta.119:
+  version "1.0.0-beta.125"
+  resolved "https://registry.nlark.com/mapvgl/download/mapvgl-1.0.0-beta.125.tgz#71b2fd84a6e4990c4d87b9e1c87c636a1aecd61f"
+  integrity sha1-cbL9hKbkmQxNh7nhyHxjahrs1h8=
 
 md5.js@^1.3.4:
   version "1.3.5"
@@ -8277,6 +8297,11 @@ thread-loader@^2.1.2:
     loader-utils "^1.1.0"
     neo-async "^2.6.0"
 
+three@^0.126.1:
+  version "0.126.1"
+  resolved "https://registry.nlark.com/three/download/three-0.126.1.tgz#cf4e4e52060fd952f6f0d5440cbd422c66bc4be7"
+  integrity sha1-z05OUgYP2VL28NVEDL1CLGa8S+c=
+
 throttle-debounce@^1.0.1:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/throttle-debounce/download/throttle-debounce-1.1.0.tgz#51853da37be68a155cb6e827b3514a3c422e89cd"
@@ -8543,6 +8568,13 @@ upper-case@^1.1.1:
   version "1.1.3"
   resolved "https://registry.npm.taobao.org/upper-case/download/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
 
+uppercamelcase@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/uppercamelcase/download/uppercamelcase-1.1.0.tgz#324d98a6b3afc7e8a8953e10641509b0e4e23f97"
+  integrity sha1-Mk2YprOvx+iolT4QZBUJsOTiP5c=
+  dependencies:
+    camelcase "^1.2.1"
+
 uri-js@^4.2.2:
   version "4.2.2"
   resolved "https://registry.npm.taobao.org/uri-js/download/uri-js-4.2.2.tgz#94c540e1ff772956e2299507c010aea6c8838eb0"
@@ -8703,6 +8735,20 @@ vm-browserify@^1.0.1:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.0.tgz#bd76d6a23323e2ca8ffa12028dc04559c75f9019"
 
+vue-amap@^0.5.10:
+  version "0.5.10"
+  resolved "https://registry.npm.taobao.org/vue-amap/download/vue-amap-0.5.10.tgz#464516203af0c085d404bd8acabf2401e4a36ff6"
+  integrity sha1-RkUWIDrwwIXUBL2Kyr8kAeSjb/Y=
+  dependencies:
+    uppercamelcase "^1.1.0"
+
+vue-bmap-gl@^0.0.17:
+  version "0.0.17"
+  resolved "https://registry.nlark.com/vue-bmap-gl/download/vue-bmap-gl-0.0.17.tgz#b42ff2277de916207b944a5d6c49c58edb5309ce"
+  integrity sha1-tC/yJ33pFiB7lEpdbEnFjttTCc4=
+  dependencies:
+    uppercamelcase "^1.1.0"
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.npm.taobao.org/vue-eslint-parser/download/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -8746,6 +8792,17 @@ vue-loader@^15.7.0:
 vue-ls@^3.2.1:
   version "3.2.1"
   resolved "https://registry.npm.taobao.org/vue-ls/download/vue-ls-3.2.1.tgz#25d1c75b3a51c17018129de607b44bb120a3385a"
+
+vue-mapvgl@^0.0.25:
+  version "0.0.25"
+  resolved "https://registry.nlark.com/vue-mapvgl/download/vue-mapvgl-0.0.25.tgz#3d55769d00c9a30df017804a2c8f61ce5d010e6a"
+  integrity sha1-PVV2nQDJow3wF4BKLI9hzl0BDmo=
+  dependencies:
+    "@tweenjs/tween.js" "^18.6.4"
+    lodash "^4.17.20"
+    mapvgl "^1.0.0-beta.119"
+    three "^0.126.1"
+    uppercamelcase "^1.1.0"
 
 vue-router@^3.0.7:
   version "3.0.7"

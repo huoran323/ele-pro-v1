@@ -15,6 +15,7 @@ export default {
     form: '表单页',
     baseform: '基础表单',
     newsform: '新闻管理',
+    excelform: 'Excel表单',
     list: '列表页',
     tablelistwrapper: '普通表格',
     tablelistcomplex: '复杂表格',
