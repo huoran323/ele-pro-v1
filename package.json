@@ -18,7 +18,7 @@
         "element-theme": "^2.0.1",
         "element-ui": "^2.11.0",
         "global": "^4.4.0",
-        "handsontable": "^9.0.2",
+        "handsontable": "^10.0.0",
         "nprogress": "^0.2.0",
         "sass": "1.18.0",
         "sass-loader": "7.1.0",
